@@ -13,6 +13,5 @@ class Result(Base):
     student_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     score = Column(Integer, nullable=False)
 
-
-    exam = relationship('Exam')
+    exam = relationship('Exam', back_populates='results')
     user = relationship('User', back_populates='results')

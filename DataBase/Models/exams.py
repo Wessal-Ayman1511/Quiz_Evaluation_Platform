@@ -9,3 +9,7 @@ class Exam(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(100), nullable=False)
     questions = relationship('Question', back_populates='exam')
+    code = Column(String(50), nullable=False, unique=True)
+    
+    questions = relationship('Question', back_populates='exam')
+    results = relationship('Result', back_populates='exam')

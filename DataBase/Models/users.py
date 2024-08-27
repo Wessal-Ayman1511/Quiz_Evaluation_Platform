@@ -1,8 +1,7 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.orm import declarative_base, relationship
-from sqlalchemy.orm import sessionmaker
-
+from sqlalchemy import Column, Integer, String, Enum
+from sqlalchemy.orm import relationship
 from .base import Base
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -10,7 +9,8 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=False)
     password = Column(String(50), nullable=False)
-    email = Column(String(50), nullable=False, unique=True)
+    email = Column(String(100), nullable=False, unique=True)
+    role = Column(Enum("teacher", "student"), nullable=False)  # Role options
 
     user_answers = relationship('UserAnswer', back_populates='user')
     results = relationship('Result', back_populates='user')
