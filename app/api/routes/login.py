@@ -19,7 +19,8 @@ def login():
             elif user.role == 'student':
                 return render_template('student_dashboard.html')
         else:
-            flash('Invalid username or password', 'danger')
+            flash('Invalid username or password ' '<a href="' + url_for('auth_bp.register') + '"> Sign Up</a>.', 'danger')
+            
             return render_template('login.html', error='Invalid username or password')
 
     return render_template('login.html')

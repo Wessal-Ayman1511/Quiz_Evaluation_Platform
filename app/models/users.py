@@ -14,11 +14,11 @@ class User(db.Model):
     results = db.relationship('Result', back_populates='user')
     
     
-    # def __repr__(self):
-    #     return f'<User {self.username}>'
+    def __repr__(self):
+        return f"User(name={self.name!r}, email={self.email!r}, role={self.role!r})"
     
-    # def set_password(self, password):
-    #     self.password = generate_password_hash(password)
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
 
-    # def check_password(self, password):
-    #     return check_password_hash(self.password, password)
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
