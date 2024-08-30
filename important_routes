@@ -1,0 +1,76 @@
+1. Authentication and User Management Routes
+These routes handle user registration, login, and profile management.
+
+POST /api/register: Register a new user (either teacher or student).
+POST /api/login: Authenticate a user and start a session.
+GET /api/logout: Logout the user and end the session.
+GET /api/users/me: Retrieve the logged-in user's profile information.
+PUT /api/users/me: Update the logged-in user's profile information.
+2. Teacher-Specific Routes
+These routes are for teachers to create, manage quizzes, and view results.
+
+POST /api/exams: Create a new exam.
+
+Body: { "title": "Math Quiz", "code": "MATH101" }
+GET /api/exams: Get a list of exams created by the logged-in teacher.
+
+GET /api/exams/<exam_id>: Get detailed information about a specific exam.
+
+PUT /api/exams/<exam_id>: Update an existing exam.
+
+Body: { "title": "Updated Math Quiz", "code": "MATH102" }
+DELETE /api/exams/<exam_id>: Delete an exam.
+
+POST /api/exams/<exam_id>/questions: Add a question to a specific exam.
+
+Body:
+json
+Copy code
+{
+  "question_title": "What is 2+2?",
+  "option1": "3",
+  "option2": "4",
+  "option3": "5",
+  "option4": "6",
+  "correct_option": "option2"
+}
+PUT /api/exams/<exam_id>/questions/<question_id>: Update a specific question in an exam.
+
+DELETE /api/exams/<exam_id>/questions/<question_id>: Delete a specific question from an exam.
+
+GET /api/exams/<exam_id>/results: Get the results of a specific exam taken by students.
+
+GET /api/results: Get aggregated results or statistics for all exams created by the logged-in teacher.
+
+3. Student-Specific Routes
+These routes allow students to take exams and view their results.
+
+GET /api/exams/available: Get a list of exams available for the logged-in student to take.
+
+GET /api/exams/<exam_id>: Get detailed information about a specific exam. (This might provide different data for students, such as not showing correct answers.)
+
+POST /api/exams/<exam_id>/submit: Submit answers for a specific exam.
+
+Body:
+json
+Copy code
+{
+  "answers": [
+    { "question_id": 1, "selected_answer": "option2" },
+    { "question_id": 2, "selected_answer": "option1" }
+  ]
+}
+GET /api/results/<exam_id>: Get the results of a specific exam taken by the student.
+
+GET /api/results: Get a summary of all exams taken by the logged-in student with their scores.
+
+4. Miscellaneous Routes
+These routes handle miscellaneous functionalities such as feedback.
+
+POST /api/feedback: Submit feedback about the platform.
+Body: { "message": "Great platform!" }
+Summary of Route Categories
+Authentication and User Management: Register, login, logout, and manage user profiles.
+Teacher-Specific: Create, update, delete exams, add questions, and view results.
+Student-Specific: View available exams, take exams, and view their own results.
+Miscellaneous: Feedback and other utilities.
