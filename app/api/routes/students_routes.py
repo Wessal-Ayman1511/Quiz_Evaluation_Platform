@@ -41,7 +41,7 @@ def get_available_exams():
 # Exam contetn for student
 @app_views.route('/api/exams/<int:exam_id>', methods=['GET'])
 @jwt_required()
-def get_exam_by_id(exam_id):
+def get_exam_for_student(exam_id):
     # Get the current logged-in user's ID
     current_user_id = get_jwt_identity()
 
