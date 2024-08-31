@@ -2,13 +2,21 @@ from flask import request, jsonify
 from app.models.exams import Exam
 from app.models.questions import Question
 from app import db
-from app.api import app_views  # Import the single blueprint instance
+from app.api import app_views  
+from app.models.users import User
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
 
 # Create a new exam
 @app_views.route('/api/exams', methods=['POST'])
+@jwt_required()  
 def create_exam():
-    data = request.json
+    current_user = get_jwt_identity() 
+    user = User.query.get(current_user)  
+    if user.role != 'teacher':
+        return jsonify({'error': 'Unauthorized. Only teachers can create exams.'}), 403
+
+    data = request.get_json()
 
     if not data:
         return jsonify({'error': 'No data provided'}), 400
@@ -18,7 +26,6 @@ def create_exam():
 
     if not title or not code:
         return jsonify({'error': 'Title and code are required'}), 400
-
 
     existing_exam = Exam.query.filter_by(code=code).first()
     if existing_exam:
@@ -72,10 +79,15 @@ def get_exam_by_name(exam_name):
     return jsonify(exam_details), 200
 #update existing exam
 @app_views.route('/api/exams/<int:exam_id>', methods=['PUT'])
+@jwt_required()
 def update_exam(exam_id):
+    current_user_id = get_jwt_identity()
     exam = Exam.query.get(exam_id)
     if not exam:
         return jsonify({'error': 'Exam not found'}), 404
+    user = User.query.get(current_user_id)
+    if user.role != 'teacher':
+        return jsonify({'error': 'Unauthorized access'}), 403
     data = request.get_json()
 
     title = data.get('title')
@@ -95,23 +107,38 @@ def update_exam(exam_id):
     return jsonify({'message': 'Exam updated successfully'}), 200
 #delete specific Exam
 @app_views.route('/api/exams/<int:exam_id>', methods=['DELETE'])
+@jwt_required()
 def delete_exam(exam_id):
+    current_user_id = get_jwt_identity()
     exam = Exam.query.get(exam_id)
     if not exam:
         return jsonify({'error': 'Exam not found'}), 404
+
+    user = User.query.get(current_user_id)
+    if user.role != 'teacher':
+        return jsonify({'error': 'Unauthorized access'}), 403
     try:
         db.session.delete(exam)
         db.session.commit()
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+
     return jsonify({'message': 'Exam deleted successfully'}), 200
 # add question to specific exam
 @app_views.route('/api/exams/<int:exam_id>/questions', methods=['POST'])
+@jwt_required()
 def add_question_to_exam(exam_id):
+    # Get the JWT claims to check the user's role
+    claims = get_jwt()
+
+    if claims.get('role') != 'teacher':
+        return jsonify({'error': 'Unauthorized'}), 403
+
     exam = Exam.query.get(exam_id)
     if not exam:
         return jsonify({'error': 'Exam not found'}), 404
+
     data = request.get_json()
     question_title = data.get('question_title')
     option1 = data.get('option1')
@@ -119,8 +146,10 @@ def add_question_to_exam(exam_id):
     option3 = data.get('option3')
     option4 = data.get('option4')
     correct_option = data.get('correct_option')
+
     if not all([question_title, option1, option2, option3, option4, correct_option]):
         return jsonify({'error': 'Missing required fields'}), 400
+
     new_question = Question(
         exam_id=exam_id,
         question_title=question_title,
@@ -130,6 +159,7 @@ def add_question_to_exam(exam_id):
         option4=option4,
         correct_option=correct_option
     )
+
     try:
         db.session.add(new_question)
         db.session.commit()
@@ -140,13 +170,22 @@ def add_question_to_exam(exam_id):
     return jsonify({'message': 'Question added successfully'}), 201
 # update specific question in specific exam
 @app_views.route('/api/exams/<int:exam_id>/questions/<int:question_id>', methods=['PUT'])
+@jwt_required()
 def update_question(exam_id, question_id):
+    # Get the JWT claims to check the user's role
+    claims = get_jwt()
+
+    if claims.get('role') != 'teacher':
+        return jsonify({'error': 'Unauthorized access'}), 403
+
     exam = Exam.query.get(exam_id)
     if not exam:
         return jsonify({'error': 'Exam not found'}), 404
+
     question = Question.query.filter_by(id=question_id, exam_id=exam_id).first()
     if not question:
         return jsonify({'error': 'Question not found'}), 404
+
     data = request.get_json()
     question_title = data.get('question_title')
     option1 = data.get('option1')
@@ -169,7 +208,6 @@ def update_question(exam_id, question_id):
     if correct_option:
         question.correct_option = correct_option
 
-
     try:
         db.session.commit()
     except Exception as e:
@@ -179,10 +217,18 @@ def update_question(exam_id, question_id):
     return jsonify({'message': 'Question updated successfully'}), 200
 # delete specific question in specific exam
 @app_views.route('/api/exams/<int:exam_id>/questions/<int:question_id>', methods=['DELETE'])
+@jwt_required()
 def delete_question(exam_id, question_id):
+    # Get the JWT claims to check the user's role
+    claims = get_jwt()
+
+    if claims.get('role') != 'teacher':
+        return jsonify({'error': 'Unauthorized access'}), 403
+
     exam = Exam.query.get(exam_id)
     if not exam:
         return jsonify({'error': 'Exam not found'}), 404
+
     question = Question.query.filter_by(id=question_id, exam_id=exam_id).first()
     if not question:
         return jsonify({'error': 'Question not found'}), 404
@@ -193,4 +239,5 @@ def delete_question(exam_id, question_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+
     return jsonify({'message': 'Question deleted successfully'}), 200
