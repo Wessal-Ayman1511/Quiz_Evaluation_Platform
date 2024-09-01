@@ -11,6 +11,7 @@ class Question(db.Model):
     option3 = db.Column(db.String(200), nullable=False)
     option4 = db.Column(db.String(200), nullable=False)
     correct_option = db.Column(db.String(200), nullable=False)
+    mark = db.Column(db.Integer, default=1)
 
     
     exam = db.relationship('Exam', back_populates='questions')

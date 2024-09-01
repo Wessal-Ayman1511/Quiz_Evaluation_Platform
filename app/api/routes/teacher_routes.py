@@ -23,6 +23,7 @@ def create_exam():
 
     title = data.get('title')
     code = data.get('code')
+    teacher_id = get_jwt_identity()
 
     if not title or not code:
         return jsonify({'error': 'Title and code are required'}), 400
@@ -31,7 +32,7 @@ def create_exam():
     if existing_exam:
         return jsonify({'error': 'Exam with this code already exists'}), 400
 
-    new_exam = Exam(title=title, code=code)
+    new_exam = Exam(title=title, code=code, teacher_id=teacher_id)
 
     db.session.add(new_exam)
     db.session.commit()
@@ -45,16 +46,17 @@ def get_exams():
         {
             'id': exam.id,
             'title': exam.title,
-            'code': exam.code
+            'code': exam.code,
+            'teacher_id': exam.teacher_id
         }
         for exam in exams
     ]
 
     return jsonify(exams_list), 200
 # Retavie the content of Exam by exam name
-@app_views.route('/api/exams/<string:exam_name>', methods=['GET'])
-def get_exam_by_name(exam_name):
-    exam = Exam.query.filter_by(title=exam_name).first()
+@app_views.route('/api/exams/int:exam_id>', methods=['GET'])
+def get_exam_by_name(exam_id):
+    exam = Exam.query.filter_by(id=exam_id).first()
 
     if not exam:
         return jsonify({'error': 'Exam not found'}), 404
@@ -62,6 +64,7 @@ def get_exam_by_name(exam_name):
         'id': exam.id,
         'title': exam.title,
         'code': exam.code,
+        'teacher_id': exam.teacher_id,
         'questions': [
             {
                 'id': question.id,
@@ -92,11 +95,14 @@ def update_exam(exam_id):
 
     title = data.get('title')
     code = data.get('code')
+    teacher_id = get_jwt_identity()
 
     if title:
         exam.title = title
     if code:
         exam.code = code
+    if teacher_id:
+        exam.teacher_id = teacher_id
         
     try:
         db.session.commit()
@@ -146,8 +152,9 @@ def add_question_to_exam(exam_id):
     option3 = data.get('option3')
     option4 = data.get('option4')
     correct_option = data.get('correct_option')
+    mark = data.get('mark')
 
-    if not all([question_title, option1, option2, option3, option4, correct_option]):
+    if not all([question_title, option1, option2, option3, option4, correct_option, mark]):
         return jsonify({'error': 'Missing required fields'}), 400
 
     new_question = Question(
@@ -157,7 +164,8 @@ def add_question_to_exam(exam_id):
         option2=option2,
         option3=option3,
         option4=option4,
-        correct_option=correct_option
+        correct_option=correct_option,
+        mark=mark
     )
 
     try:
@@ -193,6 +201,7 @@ def update_question(exam_id, question_id):
     option3 = data.get('option3')
     option4 = data.get('option4')
     correct_option = data.get('correct_option')
+    mark = data.get('mark')
 
     # Update the question fields
     if question_title:
@@ -207,6 +216,8 @@ def update_question(exam_id, question_id):
         question.option4 = option4
     if correct_option:
         question.correct_option = correct_option
+    if mark:
+        question.mark = mark
 
     try:
         db.session.commit()

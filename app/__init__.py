@@ -15,9 +15,15 @@ def create_app():
     from app.api import app_views
     app.register_blueprint(app_views)
     
-   
+    
+    from app.models import User
+    from app.models import Exam
+    from app.models import Question
+    from app.models import Result
+    from app.models import UserAnswer
 
 
-
+    with app.app_context():
+        db.create_all()
 
     return app

@@ -38,14 +38,11 @@ def get_available_exams():
     } for exam in available_exams]
 
     return jsonify(available_exams_list), 200
-# Exam contetn for student
+#Exam contetn for student
 @app_views.route('/api/exams/<int:exam_id>', methods=['GET'])
 @jwt_required()
 def get_exam_for_student(exam_id):
-    # Get the current logged-in user's ID
     current_user_id = get_jwt_identity()
-
-    # Retrieve the user by ID
     user = User.query.get(current_user_id)
     if not user:
         return jsonify({'error': 'User not found'}), 404
@@ -54,10 +51,7 @@ def get_exam_for_student(exam_id):
     if not exam:
         return jsonify({'error': 'Exam not found'}), 404
 
-    # Check if the user is a student
     is_student = user.role == 'student'
-
-    # Prepare exam details
     exam_details = {
         'id': exam.id,
         'title': exam.title,
