@@ -25,7 +25,7 @@ def login():
     user = User.query.filter_by(name=name, role=role).first()
 
     if user and check_password_hash(user.password, password):
-        access_token = create_access_token(identity=user.id, expires_delta=timedelta(hours=1), additional_claims={"role": user.role})  
+        access_token = create_access_token(identity=user.id, expires_delta=timedelta(hours=2), additional_claims={"role": user.role})  
         return jsonify({'message': 'Login successful', 'role': user.role, 'access_token': access_token}), 200
     else:
         return jsonify({'error': 'Invalid username, password, or role'}), 401

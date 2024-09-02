@@ -7,7 +7,7 @@ from app.models.usersAnswers import UserAnswer
 from app.models.questions import Question
 from app import db
 from app.api import app_views
-from app.utils import get_student, get_exam, validate_answers, save_student_answers, calculate_score, save_or_update_result, get_exam_results
+from app.utils import *
 
 
 
@@ -90,6 +90,7 @@ def submit_exam(exam_id):
         return jsonify({'error': 'Exam not found'}), 404
 
     answers = request.json.get('answers')
+    duration = request.json.get('duration')
     if not answers:
         return jsonify({'error': 'No answers provided'}), 400
 
@@ -98,9 +99,9 @@ def submit_exam(exam_id):
 
     save_student_answers(current_user_id, answers)
 
-    score, total_score = calculate_score(exam_id, current_user_id)
+    score, total_score = calculate_score(exam_id, current_user_id, answers)
 
-    save_or_update_result(exam_id, current_user_id, score)
+    save_result(exam_id, current_user_id, score, duration)
 
     return jsonify({'message': 'Exam submitted successfully', 'score': score, 'total_score': total_score}), 200
 #Get the results of a specific exam taken by the student.
@@ -115,3 +116,18 @@ def get_results(exam_id):
     if not result:
         return jsonify({'error': 'No results found for this exam'}), 404
     return jsonify(result), 200
+# Retrieve all exams
+@app_views.route('/api/exams', methods=['GET'])
+def get_exams():
+    exams = Exam.query.all()
+    exams_list = [
+        {
+            'id': exam.id,
+            'title': exam.title,
+            'code': exam.code,
+            'teacher_id': exam.teacher_id
+        }
+        for exam in exams
+    ]
+
+    return jsonify(exams_list), 200

@@ -5,6 +5,7 @@ from app import db
 from app.api import app_views  
 from app.models.users import User
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
+from datetime import datetime
 
 
 # Create a new exam
@@ -32,30 +33,43 @@ def create_exam():
     if existing_exam:
         return jsonify({'error': 'Exam with this code already exists'}), 400
 
-    new_exam = Exam(title=title, code=code, teacher_id=teacher_id)
+    new_exam = Exam(title=title, code=code, teacher_id=teacher_id, created_at=datetime.utcnow())
 
     db.session.add(new_exam)
     db.session.commit()
 
     return jsonify({'message': 'Exam created successfully', 'exam_id': new_exam.id}), 201
-# Retrieve all exams
-@app_views.route('/api/exams', methods=['GET'])
-def get_exams():
-    exams = Exam.query.all()
+
+# retrieve all exams for logged in teacher 
+from flask import jsonify, request
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
+@app_views.route('/api/teacherExams', methods=['GET'])
+@jwt_required()
+def created_exams_for_teacher():
+    current_user = get_jwt_identity()
+    user = User.query.get(current_user)  
+    if user.role != 'teacher':
+        return jsonify({'error': 'Unauthorized access'}), 403
+
+    teacher_id = user.id
+    exams = Exam.query.filter_by(teacher_id=teacher_id).all()
+    
     exams_list = [
         {
             'id': exam.id,
             'title': exam.title,
             'code': exam.code,
-            'teacher_id': exam.teacher_id
+            'teacher_id': exam.teacher_id,
+            'created_at': exam.created_at
         }
         for exam in exams
     ]
 
     return jsonify(exams_list), 200
-# Retavie the content of Exam by exam name
+# Retavie the content of Exam by exam id
 @app_views.route('/api/exams/int:exam_id>', methods=['GET'])
-def get_exam_by_name(exam_id):
+def get_exam_by_id(exam_id):
     exam = Exam.query.filter_by(id=exam_id).first()
 
     if not exam:

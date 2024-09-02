@@ -7,7 +7,7 @@ class Exam(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     code = db.Column(db.String(50), nullable=False, unique=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     teacher_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     questions = db.relationship('Question', back_populates='exam') 
