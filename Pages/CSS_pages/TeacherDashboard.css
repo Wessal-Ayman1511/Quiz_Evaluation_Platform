@@ -1,0 +1,54 @@
+body {
+    background-color: #F5EDED;
+    font-family: 'Inria Serif', serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+
+#closed * {
+    visibility: hidden;
+}
+
+#open{
+    position: absolute;
+    visibility: visible;
+    display: flex;
+    flex-direction: column;
+}
+#NavBar {
+    background-color: #6482AD;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 13%;
+}
+
+#openbook {
+    position: absolute;
+    transform: scale(0.5);
+    bottom: 20%;
+    right: 15%;
+}
+
+#arrowleft {
+    position: absolute;
+    transform: scale(0.5);
+    bottom: 60%;
+    right: 10%;
+}
+
+
+#clipboardDashboard {
+    position: absolute;
+    top: 35%;
+    transform: scale(0.8);
+}
+
+#penNewQuiz {
+    position: absolute;
+    top: 50%;
+    transform: scale(0.8);
+}

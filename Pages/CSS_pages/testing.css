@@ -1,0 +1,72 @@
+body {
+    background-color: #F5EDED;
+    font-family: 'Inria Serif', serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#NavBar {
+    background-color: #6482AD;
+    width: 15%;
+    min-width: 200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#Quiz, #Whiz {
+    color: #E2DAD6;
+    font-size: 1.5em;
+    margin: 0;
+}
+
+#Whiz {
+    margin-bottom: 10px;
+}
+
+#openbook {
+    transform: scale(0.5);
+    margin: 0 auto;
+}
+
+.menu {
+    width: 100%;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #E2DAD6;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menu-item.active,
+.menu-item:hover {
+    background-color: #5C7393;
+}
+
+.menu-item .icon {
+    transform: scale(0.8);
+    margin-right: 15px;
+}
+
+#arrowleft {
+    transform: scale(0.5);
+    margin-top: auto;
+    cursor: pointer;
+}

@@ -1,0 +1,75 @@
+body {
+    background-color: #F5EDED;
+    font-family: 'Inria Serif', serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#login_space {
+    width: 90%;
+    max-width: 400px;
+    background-color: #DBD4D4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px gray;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: #6F6661;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+    border-radius: 20px;
+    height: 50px;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    outline: none;
+    color: #6F6661;
+}
+
+input::placeholder {
+    font-family: Verdana;
+    opacity: 0.6;
+}
+
+#helpText {
+    color: #6F6661;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#helpText a {
+    color: #ad9d95;
+    text-decoration: none;
+}
+
+#loginButton {
+    width: 100%;
+    height: 50px;
+    background-color: #6F6661;
+    border: none;
+    border-radius: 20px;
+    color: #DBD4D4;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#loginButton:hover {
+    background-color: #5a534d;
+}
