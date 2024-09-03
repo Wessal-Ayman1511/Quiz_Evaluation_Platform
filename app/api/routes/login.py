@@ -29,7 +29,8 @@ def login():
     if user and check_password_hash(user.password, password):
         access_token = create_access_token(
             identity=user.id,
-            additional_claims={"role": user.role}
+            additional_claims={"role": user.role},
+            expires_delta=False
         )
         return jsonify({'message': 'Login successful', 'role': user.role, 'access_token': access_token}), 200
     else:
