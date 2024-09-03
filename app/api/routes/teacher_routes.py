@@ -41,10 +41,11 @@ def create_exam():
 
     return jsonify({'message': 'Exam created successfully', 'exam_id': new_exam.id}), 201
 
+
 # retrieve all exams for logged in teacher 
-@app_views.route('/api/teacherExams', methods=['GET'])
+@app_views.route('/api/teacherDashboard', methods=['GET'])
 @jwt_required()
-def created_exams_for_teacher():
+def teacherDashboard():
     current_user = get_jwt_identity()
     user = User.query.get(current_user)  
     if user.role != 'teacher':
@@ -62,13 +63,15 @@ def created_exams_for_teacher():
                 'title': exam.title,
                 'code': exam.code,
                 'teacher_id': exam.teacher_id,
-                'created_at': exam.created_at,
+                'created_at': exam.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                 'total_score': total_score,
                 "participants": participants
             })
 
 
     return jsonify(exams_list), 200
+
+
 # Retavie the content of Exam by exam id
 @app_views.route('/api/exams/int:exam_id>', methods=['GET'])
 def get_exam_by_id(exam_id):
@@ -81,6 +84,7 @@ def get_exam_by_id(exam_id):
         'title': exam.title,
         'code': exam.code,
         'teacher_id': exam.teacher_id,
+        'created_at': exam.created_at,
         'questions': [
             {
                 'id': question.id,
@@ -96,6 +100,8 @@ def get_exam_by_id(exam_id):
     }
 
     return jsonify(exam_details), 200
+
+
 #update existing exam
 @app_views.route('/api/exams/<int:exam_id>', methods=['PUT'])
 @jwt_required()
@@ -127,6 +133,8 @@ def update_exam(exam_id):
         return jsonify({'error': str(e)}), 500
 
     return jsonify({'message': 'Exam updated successfully'}), 200
+
+
 #delete specific Exam
 @app_views.route('/api/exams/<int:exam_id>', methods=['DELETE'])
 @jwt_required()
@@ -147,6 +155,8 @@ def delete_exam(exam_id):
         return jsonify({'error': str(e)}), 500
 
     return jsonify({'message': 'Exam deleted successfully'}), 200
+
+
 # add question to specific exam
 @app_views.route('/api/exams/<int:exam_id>/questions', methods=['POST'])
 @jwt_required()
@@ -192,6 +202,8 @@ def add_question_to_exam(exam_id):
         return jsonify({'error': str(e)}), 500
 
     return jsonify({'message': 'Question added successfully'}), 201
+
+
 # update specific question in specific exam
 @app_views.route('/api/exams/<int:exam_id>/questions/<int:question_id>', methods=['PUT'])
 @jwt_required()
@@ -242,6 +254,8 @@ def update_question(exam_id, question_id):
         return jsonify({'error': str(e)}), 500
 
     return jsonify({'message': 'Question updated successfully'}), 200
+
+
 # delete specific question in specific exam
 @app_views.route('/api/exams/<int:exam_id>/questions/<int:question_id>', methods=['DELETE'])
 @jwt_required()
@@ -268,6 +282,8 @@ def delete_question(exam_id, question_id):
         return jsonify({'error': str(e)}), 500
 
     return jsonify({'message': 'Question deleted successfully'}), 200
+
+
 # participants info
 @app_views.route('/api/examParticipants/<int:exam_id>', methods=['GET'])
 @jwt_required()

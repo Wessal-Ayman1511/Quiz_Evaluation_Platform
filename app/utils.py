@@ -10,6 +10,7 @@ from datetime import datetime
 from flask import jsonify
 from sqlalchemy import func
 
+
 def get_number_of_participants(exam_id):
     count = db.session.query(func.count(func.distinct(Result.student_id))).filter(
         Result.exam_id == exam_id
@@ -17,14 +18,15 @@ def get_number_of_participants(exam_id):
 
     return count
 
-# function to calculate total score of exam
+
 def calculate_total_score(exam_id):
     questions = Question.query.filter_by(exam_id=exam_id).all()
     total_score = sum(question.mark for question in questions)
 
     return total_score
 
-# i used it in route
+
+#used in studentResults
 def get_exam_results(exam_id, user_id):
     results = Result.query.filter_by(
         exam_id=exam_id,
@@ -40,19 +42,23 @@ def get_exam_results(exam_id, user_id):
             'exam_id': result.exam_id,
             'student_id': result.student_id,
             'score': result.score,
-            'date_taken': result.date_taken.strftime('%Y-%m-%d %H:%M:%S'),  # Formatting date
+            'date_taken': result.date_taken.strftime('%Y-%m-%d %H:%M:%S'), 
             'duration': result.duration
         })
     
     return all_results
 
 
-
-# i used it to help me in submit route for student
 def get_student(user_id):
     return User.query.filter_by(id=user_id, role='student').first()
+
+
 def get_exam(exam_id):
     return Exam.query.get(exam_id)
+
+
+
+# Used in submit Exam
 def validate_answers(exam_id, answers):
     """Validate the answers against the exam's questions."""
     question_ids = {q.id for q in Question.query.filter_by(exam_id=exam_id).all()}
@@ -76,8 +82,6 @@ def save_student_answers(user_id, answers):
             db.session.add(new_user_answer)
 
     db.session.commit()
-
-
 def calculate_score(exam_id, user_id, answers):
     """Calculate the score based on the student's answers."""
     score = 0
@@ -91,21 +95,18 @@ def calculate_score(exam_id, user_id, answers):
             total_score += question.mark
 
     return score, total_score
-
-
 def save_result(exam_id, student_id, score, duration):
     result = Result(exam_id=exam_id, student_id=student_id, score=score, duration=duration, date_taken=datetime.utcnow())
     db.session.add(result)
     db.session.commit()
 
+
 # validators
 def is_valid_email(email):
     email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     return re.match(email_regex, email) is not None
-
 def is_valid_password(password):
     return len(password) >= 8 and any(char.isdigit() for char in password) and any(char.isalpha() for char in password)
-
 def is_valid_name(name):
     if not all(char.isalpha() or char.isspace() for char in name):
         return False

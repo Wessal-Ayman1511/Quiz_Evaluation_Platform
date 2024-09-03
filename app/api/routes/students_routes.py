@@ -11,34 +11,7 @@ from app.utils import *
 
 
 
-# show available exams for logged in user
-@app_views.route('/api/exams/available', methods=['GET'])
-@jwt_required()
-def get_available_exams():
-    current_user_id = get_jwt_identity()
-
-    user = User.query.get(current_user_id)
-    if not user:
-        return jsonify({'error': 'User not found'}), 404
-
-  
-    if user.role != 'student':
-        return jsonify({'error': 'Only students can view available exams'}), 403
-
-    taken_exam_ids = [result.exam_id for result in Result.query.filter_by(student_id=current_user_id).all()]
-
-
-    available_exams = Exam.query.filter(Exam.id.notin_(taken_exam_ids)).all()
-
-
-    available_exams_list = [{
-        'id': exam.id,
-        'title': exam.title,
-        'code': exam.code
-    } for exam in available_exams]
-
-    return jsonify(available_exams_list), 200
-#Exam contetn for student
+#Exam content for student
 @app_views.route('/api/exams/<int:exam_id>', methods=['GET'])
 @jwt_required()
 def get_exam_for_student(exam_id):
@@ -72,6 +45,8 @@ def get_exam_for_student(exam_id):
     }
 
     return jsonify(exam_details), 200
+
+
 # submit answers for exam
 @app_views.route('/api/exams/<int:exam_id>/submit', methods=['POST'])
 @jwt_required()
@@ -104,6 +79,8 @@ def submit_exam(exam_id):
     save_result(exam_id, current_user_id, score, duration)
 
     return jsonify({'message': 'Exam submitted successfully', 'score': score, 'total_score': total_score}), 200
+
+
 #Get the results of a specific exam taken by the student.
 @app_views.route('/api/results/<int:exam_id>', methods=['GET'])
 @jwt_required()
@@ -116,6 +93,8 @@ def get_results(exam_id):
     if not result:
         return jsonify({'error': 'No results found for this exam'}), 404
     return jsonify(result), 200
+
+
 # Retrieve all exams
 @app_views.route('/api/exams', methods=['GET'])
 def get_exams():
@@ -125,7 +104,8 @@ def get_exams():
             'id': exam.id,
             'title': exam.title,
             'code': exam.code,
-            'teacher_id': exam.teacher_id
+            'teacher_id': exam.teacher_id,
+            'created_at': exam.created_at.strftime('%Y-%m-%d %H:%M:%S')
         }
         for exam in exams
     ]
