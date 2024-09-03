@@ -3,9 +3,26 @@ from app.models.exams import Exam
 from app.models.questions import Question
 from app.models.results import Result
 from app.models.users import User
+from app.models.results import Result
 from app.models.usersAnswers import UserAnswer
 from app import db
 from datetime import datetime
+from flask import jsonify
+from sqlalchemy import func
+
+def get_number_of_participants(exam_id):
+    count = db.session.query(func.count(func.distinct(Result.student_id))).filter(
+        Result.exam_id == exam_id
+    ).scalar()
+
+    return count
+
+# function to calculate total score of exam
+def calculate_total_score(exam_id):
+    questions = Question.query.filter_by(exam_id=exam_id).all()
+    total_score = sum(question.mark for question in questions)
+
+    return total_score
 
 # i used it in route
 def get_exam_results(exam_id, user_id):

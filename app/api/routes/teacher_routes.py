@@ -6,6 +6,7 @@ from app.api import app_views
 from app.models.users import User
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 from datetime import datetime
+from app.utils import *
 
 
 # Create a new exam
@@ -41,9 +42,6 @@ def create_exam():
     return jsonify({'message': 'Exam created successfully', 'exam_id': new_exam.id}), 201
 
 # retrieve all exams for logged in teacher 
-from flask import jsonify, request
-from flask_jwt_extended import jwt_required, get_jwt_identity
-
 @app_views.route('/api/teacherExams', methods=['GET'])
 @jwt_required()
 def created_exams_for_teacher():
@@ -55,16 +53,20 @@ def created_exams_for_teacher():
     teacher_id = user.id
     exams = Exam.query.filter_by(teacher_id=teacher_id).all()
     
-    exams_list = [
-        {
-            'id': exam.id,
-            'title': exam.title,
-            'code': exam.code,
-            'teacher_id': exam.teacher_id,
-            'created_at': exam.created_at
-        }
-        for exam in exams
-    ]
+    exams_list = []
+    for exam in exams:
+            total_score = calculate_total_score(exam.id)
+            participants = get_number_of_participants(exam.id)
+            exams_list.append({
+                'id': exam.id,
+                'title': exam.title,
+                'code': exam.code,
+                'teacher_id': exam.teacher_id,
+                'created_at': exam.created_at,
+                'total_score': total_score,
+                "participants": participants
+            })
+
 
     return jsonify(exams_list), 200
 # Retavie the content of Exam by exam id
@@ -266,3 +268,37 @@ def delete_question(exam_id, question_id):
         return jsonify({'error': str(e)}), 500
 
     return jsonify({'message': 'Question deleted successfully'}), 200
+# participants info
+@app_views.route('/api/examParticipants/<int:exam_id>', methods=['GET'])
+@jwt_required()
+def get_exam_participants(exam_id):
+    current_user_id = get_jwt_identity()
+    exam = Exam.query.get(exam_id)
+    if not exam:
+        return jsonify({'error': 'Exam not found'}), 404
+
+    # get the result for each student
+    results = (
+        db.session.query(Result)
+        .join(User, Result.student_id == User.id)
+        .filter(Result.exam_id == exam_id)
+        .order_by(Result.student_id, Result.date_taken.desc())
+        .all()
+    )
+
+    # remove duplicate result and take the last trial
+    latest_results = {}
+    for result in results:
+        if result.student_id not in latest_results:
+            latest_results[result.student_id] = result
+    participants_details = [
+        {
+            'student_name': User.query.get(result.student_id).name,
+            'score': result.score,
+            'duration': result.duration,
+            'date_taken': result.date_taken
+        }
+        for result in latest_results.values()
+    ]
+
+    return jsonify(participants_details), 200
