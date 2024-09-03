@@ -8,6 +8,7 @@ from app.models.questions import Question
 from app import db
 from app.api import app_views
 from app.utils import *
+from datetime import datetime
 
 
 
@@ -105,7 +106,7 @@ def get_exams():
             'title': exam.title,
             'code': exam.code,
             'teacher_id': exam.teacher_id,
-            'created_at': exam.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            'created_at': exam.created_at.strftime('%Y-%m-%d')
         }
         for exam in exams
     ]

@@ -42,7 +42,7 @@ def get_exam_results(exam_id, user_id):
             'exam_id': result.exam_id,
             'student_id': result.student_id,
             'score': result.score,
-            'date_taken': result.date_taken.strftime('%Y-%m-%d %H:%M:%S'), 
+            'date_taken': result.date_taken.strftime('%Y-%m-%d'), 
             'duration': result.duration
         })
     

@@ -34,7 +34,7 @@ def create_exam():
     if existing_exam:
         return jsonify({'error': 'Exam with this code already exists'}), 400
 
-    new_exam = Exam(title=title, code=code, teacher_id=teacher_id, created_at=datetime.utcnow())
+    new_exam = Exam(title=title, code=code, teacher_id=teacher_id)
 
     db.session.add(new_exam)
     db.session.commit()
@@ -63,7 +63,7 @@ def teacherDashboard():
                 'title': exam.title,
                 'code': exam.code,
                 'teacher_id': exam.teacher_id,
-                'created_at': exam.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+                'created_at': exam.created_at.strftime('%Y-%m-%d'),
                 'total_score': total_score,
                 "participants": participants
             })
@@ -312,7 +312,7 @@ def get_exam_participants(exam_id):
             'student_name': User.query.get(result.student_id).name,
             'score': result.score,
             'duration': result.duration,
-            'date_taken': result.date_taken
+            'date_taken': result.date_taken.strftime('%Y-%m-%d')
         }
         for result in latest_results.values()
     ]
