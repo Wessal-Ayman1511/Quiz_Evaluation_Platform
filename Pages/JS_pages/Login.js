@@ -20,20 +20,13 @@
 //     const password = document.getElementById("passwordInput");
 //     login(email.value, password.value);
 // });
+import axios from 'axios';
 
-import got from 'got';
-
-(async () => {
-    try {
-        const response = await got.post("http://localhost:5000/api/login", {
-            json: {
-                email: "ahmed@example.com",
-                password: "ABCD6789"
-            },
-            responseType: 'json'
-        });
-        console.log(response.body);
-    } catch (error) {
-        console.error(error);
-    }
-})();
+axios.post("http://127.0.0.1:5000/api/login", {
+    email: "ahmed@example.com",
+    password: "ABCD6789"
+}).then(response => {
+    console.log(response.data);
+}).catch(error => {
+    console.log(error);
+});
