@@ -9,6 +9,13 @@ body {
     height: 100vh;
 }
 
+#errorText {
+    color: #6F6661;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    display: none;
+}
+
 #login_space {
     width: 90%;
     max-width: 400px;

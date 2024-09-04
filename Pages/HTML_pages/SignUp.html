@@ -9,12 +9,20 @@
     <body>
         <div id="SignUpSpace">
             <form id="SignUp">
-                <label for="Email" id="EmailLabel">Email</label>
-                <input type="text" id="EmailInput" name="EmailInput" placeholder="Please enter your Email...">
+                <label for="email" id="EmailLabel">Email</label>
+                <input type="email" id="EmailInput" name="EmailInput" placeholder="Please enter your Email...">
+                <p id="errorEmail">Email is not correct.</p>
                 <label for="Name" id="NameLabel">Name</label>
                 <input type="text" id="NameInput" name="NameInput" placeholder="Please enter your Name...">
                 <label for="password" id="passwordLabel">Password</label>
                 <input type="password" id="passwordInput" name="passwordInput" placeholder="Please enter your password...">
+                <div id="passwordErrors">
+                    <p id="errorLength">Password should be at least 8 characters</p>
+                    <p id="errorCapital">Password should has uppercase characters</p>
+                    <p id="errorSmall">Password should has lowercase characters</p>
+                    <p id="errorNumber">Password should has numbers</p>
+                    <p id="errorConf">Password and Password confirmation are not the same.</p>
+                </div>
                 <label for="passwordConf" id="passwordConfLabel">Password Confirmation</label>
                 <input type="password" id="passwordConfInput" name="passwordConfInput" placeholder="Please confirm your password...">
                 <div id="roleSelection">
@@ -27,10 +35,13 @@
                         <input type="radio" id="StudentCheck" name="role" value="Student">
                         Student
                     </label>
+                    <p id="errorRole">You have to choose a role.</p>
                 </div>
                 <button id="SignUpButton">Sign Up</button>
+                <p id="errorText">Something went wrong, please try again later.</p>
                 <p id="helpText">Rules:<br>- at least 8 characters<br>- capital characters<br>- small characters<br>- numbers</p>
             </form>
         </div>
+        <script src="../JS_pages/SignUp.js"></script>
     </body>
 </html>
