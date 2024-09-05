@@ -1,0 +1,224 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5eded;
+    color: #6f6661;
+}
+
+.sidebar {
+    width: 7%;
+    height: 100vh;
+    background-color: #6482AD;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    transition: width 0.3s ease; /* Add smooth transition for width changes */
+}
+
+.logo img {
+    width: 150px;
+    margin-bottom: 40px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding-top: 100px;
+}
+
+.menu-item {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-item img {
+    width: 36px;
+    height: 36px;
+}
+
+.menu-item.active {
+    background-color: #f5eded;
+    border-radius: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #6482AD;
+    height: 70px;
+    width: calc(100% - 7%);
+    margin-left: 7%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    transition: width 0.3s ease; /* Smooth width change */
+}
+
+.notifications {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.bell-icon {
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.badge {
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    font-size: 12px;
+}
+
+.user-dropdown {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: #789ab8;
+    cursor: pointer;
+    margin-right: 50px;
+}
+
+.user-icon {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.user-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: inherit;
+}
+
+.main-content {
+    margin-top: 150px;
+    margin-left: 7%;
+    padding: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap; /* Ensure it wraps on smaller screens */
+}
+
+.card {
+    background-color: #e6d8d4;
+    padding: 20px; /* Reduced padding for smaller screens */
+    text-align: center;
+    border-radius: 10px;
+    width: 250px;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.card-icon img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.support-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #e6d8d4;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: medium;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 992px) {
+    .sidebar {
+        width: 15%; /* Increase sidebar width for medium screens */
+    }
+
+    .header {
+        width: calc(100% - 15%);
+        margin-left: 15%;
+    }
+
+    .main-content {
+        margin-left: 15%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 20%; /* Increase sidebar width for smaller screens */
+    }
+
+    .header {
+        width: calc(100% - 20%);
+        margin-left: 20%;
+    }
+
+    .main-content {
+        margin-left: 20%;
+        padding: 20px;
+    }
+
+    .card {
+        width: 150px; /* Smaller card width for mobile screens */
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .sidebar {
+        width: 100%;
+        height: auto; /* Sidebar collapses vertically on very small screens */
+        position: relative;
+    }
+
+    .header {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .card {
+        width: 90%; /* Make cards full width on mobile screens */
+        margin-bottom: 20px;
+    }
+
+    .menu {
+        flex-direction: row;
+        justify-content: space-around;
+        padding-top: 20px; /* Change menu direction for smaller screens */
+    }
+}
