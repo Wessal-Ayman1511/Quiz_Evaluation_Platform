@@ -73,8 +73,8 @@ def teacherDashboard():
 
 
 # Retavie the content of Exam by exam id
-@app_views.route('/api/exams/int:exam_id>', methods=['GET'])
-def get_exam_by_id(exam_id):
+@app_views.route('/api/exams/<int:exam_id>', methods=['GET'])
+def exam_content(exam_id):
     exam = Exam.query.filter_by(id=exam_id).first()
 
     if not exam:
@@ -93,7 +93,8 @@ def get_exam_by_id(exam_id):
                 'option2': question.option2,
                 'option3': question.option3,
                 'option4': question.option4,
-                'correct_option': question.correct_option
+                'correct_option': question.correct_option,
+                'mark': question.mark
             }
             for question in exam.questions
         ]

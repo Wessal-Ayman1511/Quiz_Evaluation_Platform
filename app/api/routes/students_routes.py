@@ -13,15 +13,15 @@ from datetime import datetime
 
 
 #Exam content for student
-@app_views.route('/api/exams/<int:exam_id>', methods=['GET'])
+@app_views.route('/api/exam-content/<string:exam_code>', methods=['GET'])
 @jwt_required()
-def get_exam_for_student(exam_id):
+def get_exam_for_student(exam_code):
     current_user_id = get_jwt_identity()
     user = User.query.get(current_user_id)
     if not user:
         return jsonify({'error': 'User not found'}), 404
 
-    exam = Exam.query.get(exam_id)
+    exam = Exam.query.filter_by(code=exam_code).first()
     if not exam:
         return jsonify({'error': 'Exam not found'}), 404
 
@@ -38,8 +38,7 @@ def get_exam_for_student(exam_id):
                 'option2': question.option2,
                 'option3': question.option3,
                 'option4': question.option4,
-                # Do not include correct_option if the user is a student
-                **({'correct_option': question.correct_option} if not is_student else {})
+                'mark': question.mark
             }
             for question in exam.questions
         ]
@@ -112,3 +111,38 @@ def get_exams():
     ]
 
     return jsonify(exams_list), 200
+
+
+@app_views.route('/api/student/results/latest', methods=['GET'])
+@jwt_required()
+def get_latest_results_for_student():
+    current_user_id = get_jwt_identity()
+    user = User.query.get(current_user_id)
+    
+    if not user or user.role != 'student':
+        return jsonify({'error': 'Unauthorized access'}), 403
+
+    all_results = db.session.query(Result).filter(
+        Result.student_id == user.id
+    ).order_by(
+        Result.exam_id.asc(), Result.date_taken.desc()
+    ).all()
+
+    latest_results = {}
+    for result in all_results:
+        if result.exam_id not in latest_results:
+            latest_results[result.exam_id] = result
+
+    # Create the list of results with necessary details
+    results_list = [
+        {
+            'exam_id': latest_results[exam_id].exam_id,
+            'exam_title': latest_results[exam_id].exam.title,
+            'score': latest_results[exam_id].score,
+            'date_taken': latest_results[exam_id].date_taken.strftime('%Y-%m-%d'),
+            'duration': latest_results[exam_id].duration
+        }
+        for exam_id in latest_results
+    ]
+
+    return jsonify(results_list), 200
