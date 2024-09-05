@@ -1,0 +1,260 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5eded;
+    color: #6f6661;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 7%;
+    height: 100vh;
+    background-color: #6482AD;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    transition: width 0.3s ease; /* Transition for responsive behavior */
+}
+
+.logo img {
+    width: 150px; /* Adjusted width for better scaling */
+    margin-bottom: 40px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding-top: 100px;
+}
+
+.menu-item {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-item img {
+    width: 30px; /* Reduced size for better scaling */
+    height: 30px;
+}
+
+.menu-item.active {
+    background-color: #f5eded;
+    border-radius: 10px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #6482AD;
+    height: 70px;
+    width: calc(100% - 7%);
+    margin-left: 7%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    transition: width 0.3s ease; /* Transition for responsive behavior */
+}
+
+.notifications {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.bell-icon {
+    font-size: 24px; /* Adjusted size */
+    cursor: pointer;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.badge {
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    font-size: 12px;
+}
+
+.user-dropdown {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: #789ab8;
+    cursor: pointer;
+    margin-right: 50px;
+}
+
+.user-icon {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.user-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: inherit;
+}
+
+/* Main content */
+.main-content {
+    margin-top: 150px;
+    margin-left: 7%;
+    padding: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    height: auto;
+    flex-wrap: wrap; /* Ensures content wraps on smaller screens */
+}
+
+.card {
+    background-color: #e6d8d4;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.card-icon img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.card input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px; /* Reduced border-radius for input fields */
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.submit {
+    background-color: #789ab8;
+    color: #fff;
+    border: none;
+    border-radius: 10px; /* Reduced border-radius for submit button */
+    cursor: pointer;
+    font-size: 16px;
+    height: 30px;
+}
+
+.submit:hover {
+    background-color: #517391;
+}
+
+.support-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #e6d8d4;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: medium;
+}
+
+/* Media Queries for responsiveness */
+@media screen and (max-width: 992px) {
+    .sidebar {
+        width: 15%; /* Increase sidebar width for medium screens */
+    }
+
+    .header {
+        width: calc(100% - 15%);
+        margin-left: 15%;
+    }
+
+    .main-content {
+        margin-left: 15%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 20%; /* Further increase sidebar width for smaller screens */
+    }
+
+    .header {
+        width: calc(100% - 20%);
+        margin-left: 20%;
+    }
+
+    .main-content {
+        margin-left: 20%;
+        flex-direction: column; /* Stack the cards vertically on smaller screens */
+        align-items: center;    /* Center the content */
+    }
+
+    .card {
+        width: 80%; /* Make the cards take more width on smaller screens */
+    }
+
+    .user-dropdown {
+        margin-right: 20px; /* Adjust margin for smaller screens */
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .sidebar {
+        width: 30%; /* Even more space for the sidebar on very small screens */
+    }
+
+    .header {
+        width: calc(100% - 30%);
+        margin-left: 30%;
+    }
+
+    .main-content {
+        margin-left: 30%;
+    }
+
+    .menu-item img {
+        width: 24px; /* Reduce icon size for the sidebar menu */
+        height: 24px;
+    }
+
+    .bell-icon {
+        font-size: 20px; /* Reduce bell icon size */
+    }
+
+    .badge {
+        top: -3px;
+        right: -10px; /* Adjust the badge position */
+    }
+
+    .card {
+        width: 90%; /* Make the cards take full width on very small screens */
+    }
+}

@@ -1,3 +1,4 @@
+
 document.getElementById('loginButton').addEventListener('click', async (event) => {
     event.preventDefault();
 
@@ -9,8 +10,18 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
             email: email,
             password: password
         });
-        console.log(response.data); 
+        sessionStorage.setItem('apiResponse', JSON.stringify(response.data));
+        sessionStorage.setItem('isLoggedIn', true);
+        if (response.data["role"] == "teacher") 
+            {
+                window.location.href = "TeacherDashboard.html";
+            }
+        else {
+            window.location.href = 'StudentHomeScreen.html';
+        }
     } catch (error) {
-        console.error('Login failed:', error);
+        if (error.response.status >= 400){
+            document.getElementById("errorText").style.display = "block";
+        }
     }
 });
