@@ -146,6 +146,15 @@ body {
     margin-bottom: 20px;
 }
 
+a {
+    color: inherit; /* Inherits the color from the parent element */
+    text-decoration: none; /* Removes the underline */
+}
+
+a:visited {
+    color: inherit; /* Set the color for visited links to be the same */
+}
+
 .support-button {
     position: fixed;
     bottom: 20px;

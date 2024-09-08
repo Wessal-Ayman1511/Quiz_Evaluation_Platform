@@ -3,27 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="sidebar.css">
-    <title>Dashboard</title>
+    <title>Quiz Whiz</title>
+    <link rel="stylesheet" href="../CSS_pages/quiz_marks.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <aside id="NavBar">
-        <div class="logo">
-            <p id="Quiz">Quiz</p>
-            <p id="Whiz">Whiz</p>
-            <img id="openbook" src="../Assets/BookOpenQuizWhiz.png" alt="Book Icon">
-        </div>
-        <div class="menu">
-            <div class="menu-item active">
-                <img class="icon" src="../Assets/ClipboardDashboard.png" alt="Dashboard Icon">
-                <p>Dash Board</p>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../Assets/BookOpenQuizWhiz.png" alt="Logo">
             </div>
-            <div class="menu-item">
-                <img class="icon" src="../Assets/PenNewQuiz.png" alt="New Quiz Icon">
-                <p>New Quiz</p>
-            </div>
-        </div>
-        <img id="arrowleft" src="../Assets/Arrow left-circle.png" alt="Arrow Icon">
-    </aside>
+            <ul>
+                <li><a href="#" class="active"> <img src="../Assets/Clipboard.png" alt="Join Quiz Icon" /> Dash Board </a></li>
+                <li><a href="#"> <img src="../Assets/Pen.png" alt="Dashboard Icon" />Join a quiz </a></li>
+            </ul>
+        </aside>
+        <main class="content">
+            <header>
+                <input type="text" placeholder="search for a quiz..." id="searchBar">
+                <select id="sortBy">
+                    <option value="">Sort by</option>
+                    <option value="name">Name</option>
+                    <option value="duration">Duration</option>
+                    <option value="mark">Mark</option>
+                    <option value="date">Date</option>
+                </select>
+                <div class="user-notifications">
+                    <span class="bell">🔔</span>
+                    <span class="notification-count">3</span>
+                    <div class="user-profile">Sample User ▼</div>
+                </div>
+            </header>
+            <section class="quiz-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quiz Name</th>
+                            <th>Duration</th>
+                            <th>Mark</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data rows will be added here dynamically -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="../JS_pages/quiz_marks.js"></script>
 </body>
 </html>

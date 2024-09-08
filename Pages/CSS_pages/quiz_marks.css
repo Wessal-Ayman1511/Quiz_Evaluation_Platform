@@ -9,22 +9,23 @@ body {
     display: flex;
     min-height: 100vh;
 }
+
 .sidebar .icon img {
-    width: 24px; /* Adjust as needed */
+    width: 24px;
     margin-right: 10px;
     vertical-align: middle;
     padding-top: 40px;
 }
 
 .sidebar ul li a img {
-    width: 16px; /* Adjust as needed */
+    width: 16px;
     margin-right: 10px;
     vertical-align: middle;
     padding: 10px;
 }
+
 .sidebar ul li {
     margin-top: 25px;
-
 }
 
 .sidebar {
@@ -32,13 +33,13 @@ body {
     padding: 20px;
     color: white;
     width: 250px;
-
-    
 }
+
 .logo img {
     width: 130px;
     padding-right: 100px;
 }
+
 .sidebar h2 {
     font-size: 24px;
     margin-bottom: 20px;
@@ -65,7 +66,6 @@ body {
     border-radius: 5px;
 }
 
-
 .content {
     flex-grow: 1;
     padding: 20px;
@@ -89,13 +89,22 @@ header input[type="text"] {
     width: 200px;
 }
 
-header button {
+/* Updated dropdown styling to match the buttons */
+header select {
     padding: 10px;
     border-radius: 5px;
     border: none;
     background-color: #ddd;
     cursor: pointer;
     margin-left: 10px;
+    width: auto; /* Allows select box to adjust to its content */
+    color: #333;
+}
+
+/* Additional styling for dropdown hover and focus states */
+header select:hover, header select:focus {
+    background-color: #ccc;
+    outline: none;
 }
 
 .user-notifications {
@@ -159,7 +168,7 @@ header button {
     .container {
         flex-direction: column;
     }
-    
+
     .sidebar {
         width: 100%;
         padding: 10px;
@@ -174,7 +183,7 @@ header button {
         align-items: flex-start;
     }
 
-    header input[type="text"], header button, .user-profile {
+    header input[type="text"], header select, .user-profile {
         width: 100%;
         margin-bottom: 10px;
     }
@@ -187,7 +196,7 @@ header button {
         display: block;
         text-align: left;
     }
-    
+
     .quiz-list td {
         border-bottom: none;
         border-top: 1px solid #ccc;

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Home Screen</title>
     <link rel="stylesheet" href="../CSS_pages/student_home.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <body>
     <div class="sidebar">
         <div class="logo">
@@ -29,24 +30,29 @@
 
     <div class="main-content">
         <div class="card">
-            <h2>Join a quiz</h2>
-            <div class="card-icon">
-                <img src="C:../Assets/PenWithNote.png" alt="Join Quiz Icon">
-            </div>
+            <a href="./view_quizzes.html" id="joinQuiz">
+                <h2>Join a quiz</h2>
+                <div class="card-icon">
+                    <img src="../Assets/PenWithNote.png" alt="Join Quiz Icon">
+                </div>
+            </a>
            
             <p>A participant can join a quiz with a code from here.</p>
         </div>
 
         <div class="card">
-            <h2>View Marks</h2>
-            <div class="card-icon">
-                <img src="../Assets/Check circle.png" alt="View Marks Icon">
-            </div>
+            <a href="./quiz_marks.html" id="showMarks">
+                <h2>View Marks</h2>
+                <div class="card-icon">
+                    <img src="../Assets/Check circle.png" alt="View Marks Icon">
+                </div>
+            </a>
             
             <p>A participant can show all his previous marks from here.</p>
         </div>
     </div>
 
     <button class="support-button">support</button>
+    <script src="../JS_pages/StudentHomeScreen.js"></script>
 </body>
 </html>

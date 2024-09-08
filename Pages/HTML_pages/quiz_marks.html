@@ -5,25 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Whiz</title>
     <link rel="stylesheet" href="../CSS_pages/quiz_marks.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div class="container">
         <aside class="sidebar">
-          
             <div class="logo">
                 <img src="../Assets/BookOpenQuizWhiz.png" alt="Logo">
             </div>
             <ul>
-                <li><a href="#" class="active"> <img src="../Assets/Clipboard.png" alt="Join Quiz Icon" /> Dash Board </a></li>
-                <li><a href="#"> <img src="../Assets/Pen.png" alt="Dashboard Icon" />Join a quiz </a></li>
+                <li><a href="./quiz_marks.html" class="active"> <img src="../Assets/Clipboard.png" alt="Join Quiz Icon" /> Dash Board </a></li>
+                <li><a href="./view_quizzes.html"> <img src="../Assets/Pen.png" alt="Dashboard Icon" />Join a quiz </a></li>
             </ul>
         </aside>
         <main class="content">
             <header>
-                <input type="text" placeholder="search for a quiz...">
-                <button>Sort by</button>
-                <button>Filter with</button>
-                <button>Filter choices</button>
+                <input type="text" placeholder="search for a quiz..." id="searchBar">
+                <select id="sortBy">
+                    <option value="">Sort by</option>
+                    <option value="name">Name</option>
+                    <option value="duration">Duration</option>
+                    <option value="mark">Mark</option>
+                    <option value="date">Date</option>
+                </select>
                 <div class="user-notifications">
                     <span class="bell">🔔</span>
                     <span class="notification-count">3</span>
@@ -41,28 +45,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Sample quiz</td>
-                            <td>from/to/date</td>
-                            <td>0/100</td>
-                            <td>9/4/2024</td>
-                        </tr>
-                        <tr>
-                            <td>Sample quiz</td>
-                            <td>from/to/date</td>
-                            <td>0/100</td>
-                            <td>9/4/2024</td>
-                        </tr>
-                        <tr>
-                            <td>Sample quiz</td>
-                            <td>from/to/date</td>
-                            <td>0/100</td>
-                            <td>9/4/2024</td>
-                        </tr>
+                        <!-- Data rows will be added here dynamically -->
                     </tbody>
                 </table>
             </section>
         </main>
     </div>
+    <script src="../JS_pages/quiz_marks.js"></script>
 </body>
 </html>

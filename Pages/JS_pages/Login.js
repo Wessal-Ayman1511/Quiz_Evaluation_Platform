@@ -4,9 +4,10 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
 
     const email = document.getElementById('usernameInput').value;
     const password = document.getElementById('passwordInput').value;
+    const url = "http://127.0.0.1:5000";
 
     try {
-        const response = await axios.post("http://127.0.0.1:5000/api/login", {
+        const response = await axios.post(url + "/api/login", {
             email: email,
             password: password
         });
@@ -17,7 +18,7 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
                 window.location.href = "TeacherDashboard.html";
             }
         else {
-            window.location.href = 'StudentHomeScreen.html';
+            window.location.href = './student_hpme.html';
         }
     } catch (error) {
         if (error.response.status >= 400){
