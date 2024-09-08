@@ -105,7 +105,8 @@ def get_exams():
             'title': exam.title,
             'code': exam.code,
             'teacher_id': exam.teacher_id,
-            'created_at': exam.created_at.strftime('%Y-%m-%d')
+            'created_at': exam.created_at.strftime('%Y-%m-%d'),
+            'total_score': calculate_total_score(exam.id)
         }
         for exam in exams
     ]
