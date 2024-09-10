@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Creator</title>
+  <link rel="stylesheet" href="createquiz.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="C:\Users\RahmaRubi\Downloads\Assets (1)\Assets\BookOpenQuizWhiz.png" alt="Quiz Whiz Logo">
+        </div>
+        <div class="menu">
+            <button class="menu-item"><img src="C:\Users\RahmaRubi\Downloads\Assets (1)\Assets\Clipboard.png" alt="Clipboard Icon"></button>
+            <button class="menu-item active"><img src="C:\Users\RahmaRubi\Downloads\Assets (1)\Assets\Pen.png" alt="Pen Icon"></button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <div class="header">
+            <div class="notifications">
+                <span class="bell-icon">🔔</span>
+                <span class="badge">3</span>
+            </div>
+            <div class="user-dropdown">
+                <span class="user-icon">👤</span>
+                <button class="user-button">Sample User</button>
+            </div>
+        </div>
+    
+
+      <div class="quiz-title">
+        <h2 style="padding-top: 30px ; padding-bottom:10px;">Quiz Title</h2>
+        <input type="text" class="quiz-title-input" placeholder="Enter Quiz Title">
+      </div>
+
+      <div class="quiz-section">
+        <input type="text" id="marks" class="marks-input" placeholder="Mark...">
+        <div class="question-box">
+          <label for="question" style="padding-left: 195px; padding-right:195px;"><b>Question Statement</b></label>
+          <input type="text" id="question" class="question-input" placeholder="What is the color of the sky?...">
+          
+          <div class="answers">
+            <label style="padding-left: 41%; padding-right: 41%"><b>Answers</b></label>
+            <ul class="answer-list">
+              <li>
+                <input type="text" class="answer-input" placeholder="Option 1...">
+              </li>
+              <li>
+                <input type="text" class="answer-input" placeholder="Option 2...">
+              </li>
+              <li>
+                <input type="text" class="answer-input" placeholder="Option 3...">
+              </li>
+              <li>
+                <input type="text" class="answer-input" placeholder="Option 4...">
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <button class="add-question-btn">New Question</button>
+
+        <div class="summary">
+          <p>Total Marks: 0 / Questions: 0</p>
+        </div>
+        
+        <button class="save-btn">Save</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,272 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4eceb;
+}
+
+.sidebar {
+    width: 9%;
+    height: 100vh;
+    background-color: #6482AD;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    transition: width 0.3s ease; /* Add smooth transition for width changes */
+}
+
+.logo img {
+    width: 150px;
+    margin-bottom: 40px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding-top: 100px;
+}
+
+.menu-item {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-item img {
+    width: 36px;
+    height: 36px;
+}
+
+.menu-item.active {
+    background-color: #f5eded;
+    border-radius: 10px;
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #6482AD;
+    height: 80px;
+    width: calc(100% - 7%);
+    margin-left: 7%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    transition: width 0.3s ease; /* Smooth width change */
+}
+
+.notifications {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.bell-icon {
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.badge {
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    font-size: 12px;
+}
+
+.user-dropdown {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: #789ab8;
+    cursor: pointer;
+    margin-right: 50px;
+}
+
+.user-icon {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.user-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: inherit;
+}
+
+.quiz-title {
+    text-align: center;
+    margin: 80px 0 20px;
+}
+
+.quiz-title h2 {
+    font-size: 24px;
+    color: #4a7b99;
+    
+}
+
+.quiz-title-input {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+}
+
+.quiz-section {
+    background-color: #d3c7c6;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 400px;
+    margin: 0 auto;
+}
+
+.question-box {
+    margin-bottom: 20px;
+}
+
+.marks-input,
+.question-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.answers {
+    margin: 10px 0;
+}
+
+.answer-list {
+    list-style-type: none;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns for answers */
+    gap: 10px; /* Add spacing between answer options */
+}
+
+.answer-input {
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.marks-input{
+    width: 30%;
+}
+
+.add-question-btn {
+    background-color: #4a7b99;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.save-btn {
+    background-color: #e3d8d5;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto 0; /* Moved the Save button up a bit */
+}
+
+.summary {
+    margin: 20px 0;
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 768px) {
+    .quiz-title-input {
+      width: 100%;
+    }
+
+    .main {
+      padding: 10px;
+    }
+
+    .question-input,
+    .marks-input {
+      width: 100%;
+    }
+
+    .add-question-btn,
+    .save-btn {
+      width: 100%;
+    }
+
+    .header-right {
+      justify-content: flex-end;
+    }
+
+    .header-right .user-dropdown {
+      margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar {
+      width: 60px;
+    }
+
+    .icon-box {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+
+    .menu li {
+      padding: 10px 0;
+      font-size: 18px;
+    }
+
+    .notification-bell {
+      font-size: 20px;
+    }
+
+    .user-dropdown {
+      font-size: 14px;
+    }
+}
