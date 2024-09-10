@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Home Screen</title>
     <link rel="stylesheet" href="../CSS_pages/create_code.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <body>
     <div class="sidebar">
         <div class="logo">
@@ -34,22 +35,31 @@
                 <img src="../Assets/PenWithNote.png"alt="Join Quiz Icon">
             </div>
            
-            <p>create a quiz for people that they can join with an invitation link or a code</p>
+            <p>create a quiz for people that they can join with a code</p>
         </div>
 
         <div class="card">
-            
+            <h2>Enter the quiz name:</h2>
+            <input class="nameInput" type="text" id="name">
+            <p class="Errors" id="errorName">Name must be at least 4 characters</p>
             <h2>Enter the quiz code:</h2>
-            <input class="code_input"  type="text" >
-
+            <input class="code_input"  type="text" id="code">
+            <div class="Errors">
+                <p id="errorLength">code should be at least 6 characters</p>
+                <p id="errorCapital">code should has uppercase characters</p>
+                <p id="errorSmall">code should has lowercase characters</p>
+                <p id="errorNumber">code should has numbers</p>
+                <p id="errorConf">code and code confirmation are not the same.</p>
+            </div>
             <h2>Confirm the code:</h2>
-            <input class = "code_input" type="text">
+            <input class = "code_input" type="text" id="codeConf">
             <br> <br>
-            <button class="submit">Submit</button>
-            
+            <button class="submit" id="createButton">Submit</button>
+            <p class="Errors" id="errorQuiz">You already have a quiz with this code.</p>
         </div>
     </div>
 
     <button class="support-button">support</button>
+    <script src="../JS_pages/create_code.js"></script>
 </body>
 </html>

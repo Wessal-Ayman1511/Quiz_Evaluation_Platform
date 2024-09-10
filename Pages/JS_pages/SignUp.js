@@ -88,7 +88,6 @@ document.getElementById("SignUpButton").addEventListener("click", async (event) 
     const passwordConf = document.getElementById("passwordConfInput");
     const Name = document.getElementById("NameInput");
     const role = document.querySelector('input[name="role"]:checked');
-    const roleValue = role.value.charAt(0).toLowerCase() + role.value.slice(1);
     const errorParagraphs = document.querySelectorAll('#passwordErrors p');
 
 
@@ -141,7 +140,7 @@ document.getElementById("SignUpButton").addEventListener("click", async (event) 
     
     if (valid) {
         try {
-            console.log(roleValue);
+            const roleValue = role.value.charAt(0).toLowerCase() + role.value.slice(1);
             const response = await axios.post("http://127.0.0.1:5000/api/register", {
                 "email": email.value,
                 "name": Name.value,
@@ -151,8 +150,8 @@ document.getElementById("SignUpButton").addEventListener("click", async (event) 
             console.log("testing here");
             sessionStorage.setItem('apiResponse', JSON.stringify(response.data));
             sessionStorage.setItem('isLoggedIn', true);
-            if (role.value == "teacher") {
-                window.location.href = "TeacherDashboard.html";
+            if (roleValue == "teacher") {
+                window.location.href = "./TeacherDashboard.html";
             } else {
                 window.location.href = './student_hpme.html';
             }
