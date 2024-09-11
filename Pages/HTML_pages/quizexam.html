@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz Creator</title>
-  <link rel="stylesheet" href="createquiz.css">
+  <link rel="stylesheet" href="../CSS_pages/quizexam.css">
 </head>
 <body>
   <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
-            <img src="../Assets/BookClosedQuizWhiz.png" alt="Quiz Whiz Logo">
+            <img src="../Assets/BookOpenQuizWhiz.png" alt="Quiz Whiz Logo">
         </div>
         <div class="menu">
-            <button class="menu-item"><img src="../Assets/Clipboard.png" alt="Clipboard Icon"></button>
-            <button class="menu-item active"><img src="../Assets/Pen.png" alt="Pen Icon"></button>
+            <button class="menu-item" ><img src="../Assets/Clipboard.png" alt="Clipboard Icon"></button>
+            <button class="menu-item active" ><img src="../Assets/Pen.png" alt="Pen Icon"></button>
         </div>
     </div>
 
@@ -31,21 +31,30 @@
                 <button class="user-button">Sample User</button>
             </div>
         </div>
-    
+        
+        <div class="quiz-title">
+          <h2 style="padding-top: 30px ; padding-bottom:10px;">Quiz Title</h2>
+        </div>
+        <div class="top_btns">
 
-      <div class="quiz-title">
-        <h2 style="padding-top: 30px ; padding-bottom:10px;">Quiz Title</h2>
-        <input type="text" class="quiz-title-input" placeholder="Enter Quiz Title">
-      </div>
+            <div class="total-marks">
+                Total Marks: 10 / Questions: 1
+              </div>
+              <div class="timer">
+                Time: 00:00:00
+              </div>
+
+        </div>
+       
 
       <div class="quiz-section">
-        <input type="text" id="marks" class="marks-input" placeholder="Mark...">
         <div class="question-box">
-          <label for="question" style="padding-left: 195px; padding-right:195px;"><b>Question Statement</b></label>
-          <input type="text" id="question" class="question-input" placeholder="What is the color of the sky?...">
+           <b>Mark: 2</b> 
+            <br>
+          <label for="question" style="padding-left: 155px; padding-right:155px;"><b> "What is the color of the sky?..."</b></label>
+        </div>
           
           <div class="answers">
-            <label style="padding-left: 41%; padding-right: 41%"><b>Answers</b></label>
             <ul class="answer-list">
               <li>
                 <input type="text" class="answer-input" placeholder="Option 1...">
@@ -62,15 +71,10 @@
             </ul>
           </div>
         </div>
-
-        <button class="add-question-btn">New Question</button>
-
-        <div class="summary">
-          <p>Total Marks: 0 / Questions: 0</p>
-        </div>
         
-        <button class="save-btn">Save</button>
-      </div>
+        <div class="btns">
+        <button class="submit-btn">Submit</button>
+        </div>
     </div>
   </div>
 </body>
