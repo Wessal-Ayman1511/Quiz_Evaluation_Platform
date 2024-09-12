@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz Creator</title>
   <link rel="stylesheet" href="../CSS_pages/createquiz.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -31,47 +32,45 @@
                 <button class="user-button">Sample User</button>
             </div>
         </div>
-    
 
-      <div class="quiz-title">
-        <h2 style="padding-top: 30px ; padding-bottom:10px;">Quiz Title</h2>
-        <input type="text" class="quiz-title-input" placeholder="Enter Quiz Title">
-      </div>
-
-      <div class="quiz-section">
-        <input type="text" id="marks" class="marks-input" placeholder="Mark...">
-        <div class="question-box">
-          <label for="question" style="padding-left: 195px; padding-right:195px;"><b>Question Statement</b></label>
-          <input type="text" id="question" class="question-input" placeholder="What is the color of the sky?...">
-          
-          <div class="answers">
-            <label style="padding-left: 41%; padding-right: 41%"><b>Answers</b></label>
-            <ul class="answer-list">
-              <li>
-                <input type="text" class="answer-input" placeholder="Option 1...">
-              </li>
-              <li>
-                <input type="text" class="answer-input" placeholder="Option 2...">
-              </li>
-              <li>
-                <input type="text" class="answer-input" placeholder="Option 3...">
-              </li>
-              <li>
-                <input type="text" class="answer-input" placeholder="Option 4...">
-              </li>
-            </ul>
-          </div>
+        <div class="quiz-title">
+            <h2 style="padding-top: 30px; padding-bottom:10px;">Quiz Title</h2>
+            <input type="text" id="quizTitle" class="quiz-title-input" placeholder="Enter Quiz Title">
+            <p class="Errors" id="titleError">Title should be at least 4 characters.</p>
         </div>
 
-        <button class="add-question-btn">New Question</button>
+        <!-- Questions Section -->
+        <div name="questions">
+            <!-- Question 1 -->
+            <div class="quiz-section" id="question1">
+                <input type="text" id="marks" class="marks-input" placeholder="Mark...">
+                <p class="Errors" id="markError">Mark should be a number.</p>
+                <div class="question-box">
+                    <label for="question" style="padding-left: 195px; padding-right:195px;"><b>Question Statement</b></label>
+                    <input type="text" id="Qstatement" class="question-input" placeholder="What is the color of the sky?...">
+                    
+                    <div class="answers">
+                        <label style="padding-left: 41%; padding-right: 41%"><b>Answers</b></label>
+                        <ul class="answer-list">
+                            <li><label><input type="radio" name="correctAnswer" value="1"><input type="text" class="answer-input" id=1 placeholder="Option 1..."></label></li>
+                            <li><label><input type="radio" name="correctAnswer" value="2"><input type="text" class="answer-input" id=2 placeholder="Option 2..."></label></li>
+                            <li><label><input type="radio" name="correctAnswer" value="3"><input type="text" class="answer-input" id=3 placeholder="Option 3..."></label></li>
+                            <li><label><input type="radio" name="correctAnswer" value="4"><input type="text" class="answer-input" id=4 placeholder="Option 4..."></label></li>
+                        </ul>
+                        <p class="Errors" id="choiceError">You have to choose which answer is correct.</p>
+                    </div>
+                </div>
+                <button class="add-question-btn" id="button1">Add Question</button>
+            </div>
+          </div>
 
         <div class="summary">
-          <p>Total Marks: 0 / Questions: 0</p>
+            <p>Total Marks: 0 / Questions: 0</p>
         </div>
-        
         <button class="save-btn">Save</button>
-      </div>
+        <p class="Errors" id="quizError">A quiz should have at least 1 question</p>
     </div>
   </div>
+  <script src="../JS_pages/createquiz.js"></script>
 </body>
 </html>

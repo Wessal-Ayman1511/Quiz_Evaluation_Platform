@@ -28,13 +28,10 @@ label {
     margin-bottom: 5px;
 }
 
-<div id="passwordErrors">
-                    <p id="errorLength">Password should be at least 8 characters</p>
-                    <p id="errorCapital">Password should has uppercase characters</p>
-                    <p id="errorSmall">Password should has lowercase characters</p>
-                    <p id="errorNumber">Password should has numbers</p>
-                    <p id="errorConf">Password and Password confirmation are not the same.</p>
-                </div>
+#SignUp p {
+    display: none;
+    color: #6F6661;
+}
 
 input[type="text"],
 input[type="password"],

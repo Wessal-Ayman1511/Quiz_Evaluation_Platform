@@ -1,4 +1,3 @@
-
 function checkLogin() {
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
 
@@ -7,6 +6,8 @@ function checkLogin() {
         window.location.href = 'login.html';
     }
 }
+
+
 
 const url = "http://127.0.0.1:5000";
 function displayQuizzes(quizzes) {
@@ -17,10 +18,10 @@ function displayQuizzes(quizzes) {
     quizzes.forEach(quiz => {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td>${quiz.exam_title}</td>
-            <td>${quiz.duration} min</td>
-            <td>${quiz.score}</td>
-            <td>${quiz.date_taken}</td>
+            <td><a href="#" id='quiz${quiz.id}'>${quiz.title}</a></td>
+            <td><a href="#" id='students${quiz.id}'>${quiz.participants}</a></td>
+            <td>${quiz.total_score}</td>
+            <td>${quiz.created_at}</td>
         `;
         tableBody.appendChild(newRow);
     });
@@ -28,12 +29,13 @@ function displayQuizzes(quizzes) {
 
 function filterQuizzes() {
     const searchInput = document.getElementById('searchBar').value.toLowerCase();
-    const quizzes = JSON.parse(sessionStorage.getItem("allMarks"));
+    const quizzes = JSON.parse(sessionStorage.getItem("allExams"));
 
     // Filter the quizzes based on the search input
     const filteredQuizzes = quizzes.filter(quiz => 
-        quiz.exam_title.toLowerCase().includes(searchInput) ||
-        quiz.date_taken.toLowerCase().includes(searchInput)
+        quiz.title.toLowerCase().includes(searchInput) ||
+        quiz.created_at.toLowerCase().includes(searchInput) ||
+        String(quiz.total_score).includes(searchInput)
     );
 
     // Display the filtered quizzes
@@ -42,16 +44,15 @@ function filterQuizzes() {
 
 async function loadQuizzes(token) {
     try {
-        const resultResponse = await axios.get(url + "/api/student/results/latest", {
+        const resultResponse = await axios.get(url + "/api/teacherDashboard", {
             headers: {  
                 'Authorization': `Bearer ${token}`
             }
         });
-        sessionStorage.setItem("allMarks", JSON.stringify(resultResponse.data)); // Store the data part of the response
+        sessionStorage.setItem("allExams", JSON.stringify(resultResponse.data)); // Store the data part of the response
 
         // Display all quizzes initially
-        const quizzes = JSON.parse(sessionStorage.getItem("allMarks"));
-        console.log(quizzes);
+        const quizzes = JSON.parse(sessionStorage.getItem("allExams"));
         displayQuizzes(quizzes); // Show all results on initial load
 
     } catch (error) {
@@ -65,24 +66,24 @@ async function loadQuizzes(token) {
 
 function sortQuizzes() {
     const sortBy = this.value;
-    let quizzes = JSON.parse(sessionStorage.getItem("allMarks"));
+    let quizzes = JSON.parse(sessionStorage.getItem("allExams"));
 
     // Sort based on the selected option
     if (sortBy === 'name') {
-        quizzes.sort((a, b) => a.exam_title.localeCompare(b.exam_title));
-    } else if (sortBy === 'duration') {
-        quizzes.sort((a, b) => a.duration - b.duration);
+        quizzes.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortBy === 'participant') {
+        quizzes.sort((a, b) => a.participants - b.participants);
     } else if (sortBy === 'mark') {
-        quizzes.sort((a, b) => b.score - a.score); // Assuming score is numeric
+        quizzes.sort((a, b) => b.total_score - a.total_score); // Assuming score is numeric
     } else if (sortBy === 'date') {
-        quizzes.sort((a, b) => new Date(b.date_taken) - new Date(a.date_taken));
+        quizzes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     }
 
     // Display the sorted quizzes
     displayQuizzes(quizzes);
 }
 
-// Call checkLogin on page load
+
 window.addEventListener('load', function() {
     checkLogin();
     const token = JSON.parse(sessionStorage.apiResponse).access_token;

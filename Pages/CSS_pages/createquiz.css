@@ -135,6 +135,11 @@ body {
     margin: 80px 0 20px;
 }
 
+.Errors {
+    display: none;
+    color: #6F6661;
+}
+
 .quiz-title h2 {
     font-size: 24px;
     color: #4a7b99;
@@ -155,6 +160,7 @@ body {
     max-width: 600px;
     max-height: 400px;
     margin: 0 auto;
+    margin-bottom: 20px;
 }
 
 .question-box {
@@ -197,9 +203,11 @@ body {
     color: white;
     border: none;
     padding: 10px 20px;
+    margin: 20px auto 0; /* Aligns the button within the quiz section */
     border-radius: 5px;
+    display: block; /* Ensures the button takes up full width when needed */
     cursor: pointer;
-    margin-bottom: 20px;
+    width: fit-content; /* Keeps button width to content size */
 }
 
 .save-btn {
@@ -214,7 +222,23 @@ body {
 }
 
 .summary {
-    margin: 20px 0;
+    position: fixed;  /* Fixes the position relative to the viewport */
+    bottom: 10px;     /* Positions it 10px from the bottom */
+    right: 10px;      /* Positions it 10px from the right */
+    background-color: #d3c7c6;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;    /* Ensures it appears on top of other elements */
+}
+
+#quizError {
+    margin-top: 20px;         /* Push the element to the bottom */
+    text-align: center;       /* Center the text horizontally */
+    padding: 10px;            /* Add padding for some space around the text */
+    color: #333;             /* Optional: White text for contrast */
+    font-size: 16px;          /* Adjust font size if necessary */
 }
 
 /* Responsive Styling */

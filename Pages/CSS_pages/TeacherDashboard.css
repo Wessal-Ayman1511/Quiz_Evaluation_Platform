@@ -1,54 +1,232 @@
-body {
-    background-color: #F5EDED;
-    font-family: 'Inria Serif', serif;
+/* General Styling */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4eceb;
+}
+
+.container {
     display: flex;
+    min-height: 100vh;
 }
 
-
-#closed * {
-    visibility: hidden;
-}
-
-#open{
-    position: absolute;
-    visibility: visible;
-    display: flex;
-    flex-direction: column;
-}
-#NavBar {
+.sidebar {
+    width: 12%;
+    height: 100vh;
     background-color: #6482AD;
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 13%;
+    align-items: center;
+    padding: 20px;
+    top: 0;
+    left: 0;
 }
 
-#openbook {
-    position: absolute;
-    transform: scale(0.5);
-    bottom: 20%;
-    right: 15%;
+.logo img {
+    width: 150px;
+    margin-bottom: 40px;
 }
 
-#arrowleft {
-    position: absolute;
-    transform: scale(0.5);
-    bottom: 60%;
-    right: 10%;
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding-top: 100px;
 }
 
-
-#clipboardDashboard {
-    position: absolute;
-    top: 35%;
-    transform: scale(0.8);
+.menu-item {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 
-#penNewQuiz {
-    position: absolute;
-    top: 50%;
-    transform: scale(0.8);
+.menu-item img {
+    width: 36px;
+    height: 36px;
+}
+
+.menu-item.active {
+    background-color: #f5eded;
+    border-radius: 10px;
+}
+
+.main {
+    margin-left: 12%; /* Space for the sidebar */
+    width: 88%; /* Remaining width after sidebar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px; /* For the fixed header space */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #e7d7d7;
+    border-radius: 20px;
+    height: 80px;
+    width: 80%; /* Header width matches main content area */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    color: #ffffff;
+    position: fixed;
+    top: 10px;
+    z-index: 1000;
+    left: 15%; /* Adjusted to not overlap with the sidebar */
+}
+
+header input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+    margin-right: auto; /* Pushes the search bar to the left */
+}
+
+header select {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #a2a1a1;
+    cursor: pointer;
+    margin-left: 10px;
+    width: auto;
+    color: #333;
+    margin-right: auto; /* Centers the dropdown */
+}
+
+header select:hover, header select:focus {
+    background-color: #ccc;
+    outline: none;
+}
+
+.user-notifications {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Keeps user notification and profile on the right */
+}
+
+.bell {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.notification-count {
+    background-color: red;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-profile {
+    background-color: #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+.quiz-list {
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.quiz-list table {
+    width: 80%;
+    margin: 0 auto; /* Centers the table */
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.quiz-list th, .quiz-list td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.quiz-list th {
+    background-color: #eee;
+}
+
+.quiz-list input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100px;
+}
+
+.quiz-list button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #7293b6;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .main {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        left: 0;
+    }
+
+    header input[type="text"], header button, .user-profile {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .quiz-list table {
+        width: 100%;
+    }
+
+    .quiz-list th, .quiz-list td {
+        display: block;
+        text-align: left;
+    }
+
+    .quiz-list td {
+        border-bottom: none;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .quiz-list input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .quiz-list button {
+        width: 100%;
+    }
 }

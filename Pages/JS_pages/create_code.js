@@ -96,6 +96,7 @@ document.getElementById("createButton").addEventListener("click", async (event) 
         valid = false;
     }
     else if (!isValidPasswordLength(code.value)) {
+        console.log("here");
         document.getElementById("errorLength").style.display = "block";
         valid = false;
     }
@@ -133,16 +134,12 @@ document.getElementById("createButton").addEventListener("click", async (event) 
             };
             const response = await axios.post(url + "/api/exams", data, config);
 
-            console.log(name.value.trim());
-            console.log(code.value.trim());
-            console.log(response.data);
-            // sessionStorage.setItem('apiResponse', JSON.stringify(response.data));
-            // sessionStorage.setItem('isLoggedIn', true);
-            // if (roleValue == "teacher") {
-            //     window.location.href = "./TeacherDashboard.html";
-            // } else {
-            //     window.location.href = './student_hpme.html';
-            // }
+            const createdExam = JSON.stringify({
+                "id" : response.data.exam_id,
+                "data" : data
+            });
+            sessionStorage.setItem("createdExam", createdExam);
+            window.location.href = "./createquiz.html"
         } catch (error) {
             if (error.response && error.response.status >= 400) { // Check if error.response exists
                 document.getElementById("errorQuiz").style.display = "block";

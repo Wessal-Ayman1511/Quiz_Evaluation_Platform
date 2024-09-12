@@ -143,7 +143,7 @@ body {
     margin-bottom: 20px;
 }
 
-.Errors {
+#Errors p, #errorName, #errorQuiz{
     display: none;
     color: #6F6661;
 }
