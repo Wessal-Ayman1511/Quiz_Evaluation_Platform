@@ -1,0 +1,288 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /* color: #333; */
+    line-height: 1.6;
+  
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    max-width: 1200px;
+}
+
+/* Cover Page */
+.cover-page {
+    height: 100vh;
+    background-color: #002147;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    
+}
+
+.cover-page h1 {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.cover-page p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+}
+
+.cover-page .cta-cover {
+    background-color: gold;
+    color: #002147;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+}
+
+.cover-page .cta-cover:hover {
+    background-color: darkgoldenrod;
+}
+
+/* Header */
+.header {
+    background-color: #002147;
+    color: #fff;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+}
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar
+{
+    margin-left: auto;
+}
+.header .navbar ul {
+    list-style: none;
+    display: flex;
+    padding-right: 20px;
+}
+
+.header .navbar ul li {
+    margin-right: 20px;
+}
+
+.header .navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header .cta {
+    background-color: gold;
+    color: #002147;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.header .cta:hover {
+    background-color: darkgoldenrod;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #002147;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.hero .cta {
+    background-color: gold;
+    color: #002147;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.hero .cta:hover {
+    background-color: darkgoldenrod;
+}
+
+/* Features Section */
+.features {
+    background-color: #f4f4f4;
+    padding: 60px 0;
+    animation: fadeIn 2s ease;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #002147;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    animation: slideInUp 1.5s ease-out;
+}
+
+.feature-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    background-color: rgba(226, 218, 53, 0.442)
+}
+
+.feature-item h3 {
+    color: #002147;
+    margin-bottom: 15px;
+}
+
+.feature-item p {
+    color: #666;
+}
+
+/* About Us Section */
+.about {
+    background-color: #fff;
+    padding: 60px 0;
+}
+
+.about h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #002147;
+}
+
+.about p {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    color: #666;
+}
+
+.team {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.team h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #002147;
+}
+
+.team-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    margin: 20px;
+    text-align: center;
+}
+
+.team-member h3 {
+    color: #002147;
+    margin-bottom: 10px;
+}
+
+.team-member p {
+    color: #666;
+}
+
+.team-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+/* Contact Section */
+.contact {
+    background-color: #002147;
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.contact h2 {
+    margin-bottom: 20px;
+}
+
+.contact p {
+    color: gold;
+}
+
+/* Footer */
+.footer {
+    background-color: #002147;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer p {
+    margin: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
