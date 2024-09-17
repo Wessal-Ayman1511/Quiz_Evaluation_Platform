@@ -83,6 +83,31 @@ header {
 }
 
 
+header input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+/* Updated dropdown styling to match the buttons */
+header select {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ddd;
+    cursor: pointer;
+    margin-left: 10px;
+    width: auto; /* Allows select box to adjust to its content */
+    color: #333;
+}
+
+/* Additional styling for dropdown hover and focus states */
+header select:hover, header select:focus {
+    background-color: #ccc;
+    outline: none;
+}
+
 .user-notifications {
     display: flex;
     align-items: center;

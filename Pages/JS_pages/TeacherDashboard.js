@@ -18,14 +18,17 @@ function displayQuizzes(quizzes) {
     quizzes.forEach(quiz => {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td><a href="#" id='quiz${quiz.id}'>${quiz.title}</a></td>
-            <td><a href="#" id='students${quiz.id}'>${quiz.participants}</a></td>
+            <td><a class="examContent" href="#" id='quiz${quiz.id}'>${quiz.title}</a></td>
+            <td><a class="examParticipants" href="#" id='students${quiz.id}'>${quiz.participants}</a></td>
             <td>${quiz.total_score}</td>
             <td>${quiz.created_at}</td>
         `;
         tableBody.appendChild(newRow);
     });
 }
+
+
+
 
 function filterQuizzes() {
     const searchInput = document.getElementById('searchBar').value.toLowerCase();
@@ -93,4 +96,22 @@ window.addEventListener('load', function() {
     const searchBar = document.getElementById('searchBar');
     searchBar.addEventListener('input', filterQuizzes); // Call filterQuizzes on each input
     document.getElementById('sortBy').addEventListener('change', sortQuizzes);
+});
+
+document.querySelector('tbody').addEventListener('click', function(event) {
+    if (event.target && event.target.matches('.examContent')) {
+        const btnId = event.target.id.substring(4); // getting the button id and removing the button word from the beginning
+        // handleButtonClick(action);
+        sessionStorage.setItem("quizId", JSON.stringify(btnId));
+        window.location.href = "./viwe_content.html";
+    }
+});
+
+document.querySelector('tbody').addEventListener('click', function(event) {
+    if (event.target && event.target.matches('.examParticipants')) {
+        const btnId = event.target.id.substring(8); // getting the button id and removing the button word from the beginning
+        // handleButtonClick(action);
+        sessionStorage.setItem("quizId", JSON.stringify(btnId));
+        window.location.href = "./view_students.html";
+    }
 });

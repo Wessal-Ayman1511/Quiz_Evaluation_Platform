@@ -87,12 +87,12 @@ function openQuiz(id) {
     
     quizzes.forEach(quiz => {
         if (quiz.id === id && quiz.code === code){
-            sessionStorage.setItem("quizId", code);
-            window.location.href = 'quizStudent.html';
+            sessionStorage.setItem("quizRequested", JSON.stringify(quiz));
+            window.location.href = 'quizExam.html';
         }
     });
-
-
+    document.getElementById("code" + id).style.borderColor = 'red';
+    document.getElementById("code" + id).placeholder = 'wrong code!';
 }
 
 // Call checkLogin on page load

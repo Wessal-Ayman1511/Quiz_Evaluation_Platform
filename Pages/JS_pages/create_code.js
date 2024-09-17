@@ -96,7 +96,6 @@ document.getElementById("createButton").addEventListener("click", async (event) 
         valid = false;
     }
     else if (!isValidPasswordLength(code.value)) {
-        console.log("here");
         document.getElementById("errorLength").style.display = "block";
         valid = false;
     }

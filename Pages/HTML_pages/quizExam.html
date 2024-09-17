@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Creator</title>
+  <link rel="stylesheet" href="../CSS_pages/quizExam.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="../Assets/BookOpenQuizWhiz.png" alt="Quiz Whiz Logo">
+        </div>
+        <div class="menu">
+            <button class="menu-item" ><img src="../Assets/Clipboard.png" alt="Clipboard Icon"></button>
+            <button class="menu-item active" ><img src="../Assets/Pen.png" alt="Pen Icon"></button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <div class="header">
+            <div class="notifications">
+                <span class="bell-icon">🔔</span>
+                <span class="badge">3</span>
+            </div>
+            <div class="user-dropdown">
+                <span class="user-icon">👤</span>
+                <button class="user-button">Sample User</button>
+            </div>
+        </div>
+        
+        <div class="quiz-title">
+          <label  style="padding-top: 10px ; padding-bottom:10px; width: 100px; height: 40px; "><h2>Quiz Title</h2></button>
+        </div>
+        <div class="top_btns">
+
+            <div class="total-marks">
+                <h4>Total Marks: / Questions: </h2>
+            </div>
+            <div class="timer" id="timer">00:00:00</div>
+        </div>
+       
+
+        <!-- <div class="quiz-section">
+            <div class="question-box">
+               <b>Mark: 2</b> 
+                <br>
+              <label for="question" style="padding-left: 155px; padding-right:155px;"><b> "What is the color of the sky?..."</b></label>
+            </div>
+              
+              <div class="answers">
+                <ul class="answer-list">
+                  <li>
+                    <button class="answer-input" id="1">Option 1... </button>
+                  </li>
+                  <li>
+                    <button class="answer-input" id="2">Option 1... </button>
+                  </li>
+                  <li>
+                    <button class="answer-input" id="3">Option 1... </button>
+                  </li>
+                  <li>
+                    <button class="answer-input" id="4">Option 1... </button>
+                </ul>
+              </div>
+            </div> -->
+        
+        <!-- <div class="btns">
+        <button class="submit-btn">Submit</button>
+        </div> -->
+    </div>
+  </div>
+  <script src="../JS_pages/quizExam.js"></script>
+</body>
+</html>

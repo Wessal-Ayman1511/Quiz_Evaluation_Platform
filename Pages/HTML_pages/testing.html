@@ -1,96 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Creator</title>
-  <link rel="stylesheet" href="../CSS_pages/testing.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timer Example</title>
+<style>
+  #timer {
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+  }
+  button {
+    margin: 10px;
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <img src="../Assets/BookOpenQuizWhiz.png" alt="Quiz Whiz Logo">
-        </div>
-        <div class="menu">
-            <button class="menu-item"><img src="../Assets/Clipboard.png" alt="Clipboard Icon"></button>
-            <button class="menu-item active"><img src="../Assets/Pen.png" alt="Pen Icon"></button>
-        </div>
-    </div>
+  <div id="timer">00:00:00</div>
+  <button id="start">Start</button>
+  <button id="stop" disabled>Stop</button>
+  <div id="timeSpent"></div>
 
-    <!-- Main Content -->
-    <div class="main">
-        <div class="header">
-            <div class="notifications">
-                <span class="bell-icon">🔔</span>
-                <span class="badge">3</span>
-            </div>
-            <div class="user-dropdown">
-                <span class="user-icon">👤</span>
-                <button class="user-button">Sample User</button>
-            </div>
-        </div>
+  <script>
+    const timerDisplay = document.getElementById('timer');
+    const timeSpentDisplay = document.getElementById('timeSpent');
+    const startButton = document.getElementById('start');
+    const stopButton = document.getElementById('stop');
 
-        <div class="quiz-title">
-            <h2 style="padding-top: 30px; padding-bottom:10px;">Quiz Title</h2>
-            <input type="text" id="quizTitle" class="quiz-title-input" placeholder="Enter Quiz Title">
-            <p class="Errors" id="titleError">Title should be at least 4 characters.</p>
-        </div>
+    let seconds = 0;
+    let minutes = 0;
+    let hours = 0;
+    let timerInterval;
 
-        <!-- Questions Section -->
-        <div name="questions">
-            <!-- Question 1 -->
-            <div class="quiz-section" id="question1">
-                <input type="text" id="marks1" class="marks-input" placeholder="Mark...">
-                <p class="Errors" id="markError1">Mark should be a number.</p>
-                <div class="question-box">
-                    <label for="question" style="padding-left: 195px; padding-right:195px;"><b>Question Statement</b></label>
-                    <input type="text" id="Qstatement1" class="question-input" placeholder="What is the color of the sky?...">
-                    
-                    <div class="answers">
-                        <label style="padding-left: 41%; padding-right: 41%"><b>Answers</b></label>
-                        <ul class="answer-list">
-                            <li><label><input type="radio" name="correctAnswer1" value="1"><input type="text" class="answer-input" placeholder="Option 1..."></label></li>
-                            <li><label><input type="radio" name="correctAnswer1" value="2"><input type="text" class="answer-input" placeholder="Option 2..."></label></li>
-                            <li><label><input type="radio" name="correctAnswer1" value="3"><input type="text" class="answer-input" placeholder="Option 3..."></label></li>
-                            <li><label><input type="radio" name="correctAnswer1" value="4"><input type="text" class="answer-input" placeholder="Option 4..."></label></li>
-                        </ul>
-                        <p class="Errors" id="choiceError1">You have to choose which answer is correct.</p>
-                    </div>
-                </div>
-                <button class="add-question-btn" id="button1">Add Question</button>
-            </div>
+    // Update timer display function
+    function updateTimer() {
+      seconds++;
+      if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+          minutes = 0;
+          hours++;
+        }
+      }
 
-            <!-- Question 2 -->
-            <div class="quiz-section" id="question2">
-                <input type="text" id="marks2" class="marks-input" placeholder="Mark...">
-                <p class="Errors" id="markError2">Mark should be a number.</p>
-                <div class="question-box">
-                    <label for="question" style="padding-left: 195px; padding-right:195px;"><b>Question Statement</b></label>
-                    <input type="text" id="Qstatement2" class="question-input" placeholder="What is the color of the sky?...">
-                    
-                    <div class="answers">
-                        <label style="padding-left: 41%; padding-right: 41%"><b>Answers</b></label>
-                        <ul class="answer-list">
-                            <li><label><input type="radio" name="correctAnswer2" value="1"><input type="text" class="answer-input" placeholder="Option 1..."></label></li>
-                            <li><label><input type="radio" name="correctAnswer2" value="2"><input type="text" class="answer-input" placeholder="Option 2..."></label></li>
-                            <li><label><input type="radio" name="correctAnswer2" value="3"><input type="text" class="answer-input" placeholder="Option 3..."></label></li>
-                            <li><label><input type="radio" name="correctAnswer2" value="4"><input type="text" class="answer-input" placeholder="Option 4..."></label></li>
-                        </ul>
-                        <p class="Errors" id="choiceError2">You have to choose which answer is correct.</p>
-                    </div>
-                </div>
-                <button class="add-question-btn" id="button2">Add Question</button>
-            </div>
-        </div>
+      const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      timerDisplay.textContent = formattedTime;
+    }
 
-        <div class="summary">
-            <p>Total Marks: 0 / Questions: 0</p>
-        </div>
-        <button class="save-btn">Save</button>
-    </div>
-  </div>
-  <!-- <script src="../JS_pages/createquiz.js"></script> -->
+    // Start the timer
+    startButton.addEventListener('click', () => {
+      timerInterval = setInterval(updateTimer, 1000);
+      startButton.disabled = true;
+      stopButton.disabled = false;
+    });
+
+    // Stop the timer
+    stopButton.addEventListener('click', () => {
+      clearInterval(timerInterval);
+
+      // Display the time spent
+      const timeSpent = `Time spent: ${hours} hour(s), ${minutes} minute(s), ${seconds} second(s)`;
+      timeSpentDisplay.textContent = timeSpent;
+
+      startButton.disabled = false;
+      stopButton.disabled = true;
+    });
+  </script>
 </body>
 </html>

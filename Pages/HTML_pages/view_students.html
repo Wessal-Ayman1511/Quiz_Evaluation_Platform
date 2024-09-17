@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Whiz</title>
     <link rel="stylesheet" href="../CSS_pages/view_students.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -20,7 +21,14 @@
         </aside>
         <main class="content">
             <header>
-
+                <input type="text" placeholder="search for a quiz..." id="searchBar">
+                <select id="sortBy">
+                    <option value="">Sort by</option>
+                    <option value="name">Name</option>
+                    <option value="duration">Duration</option>
+                    <option value="mark">Mark</option>
+                    <option value="date">Date</option>
+                </select>
                 <div class="user-notifications">
                     <span class="bell">🔔</span>
                     <span class="notification-count">3</span>
@@ -61,5 +69,6 @@
             </section>
         </main>
     </div>
+    <script src="../JS_pages/view_students.js"></script>
 </body>
 </html>
