@@ -200,6 +200,11 @@ body {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    cursor: pointer; 
+    
+}
+.answer-input:hover{
+    background-color: #e2e2e2;
 }
 .btns{
     display: flex;              
