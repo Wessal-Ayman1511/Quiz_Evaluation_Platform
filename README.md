@@ -30,31 +30,26 @@ Follow these steps to set up the Quiz Evaluation Platform on your local machine:
 ### Prerequisites
 
 - **Python:** Ensure Python 3.6 or higher is installed.
-- **MySQL:** Install and run MySQL on your system.
+- **MySQL:** Install and run MySQL on your system
+
 
 ### Steps
+
 
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/Wessal-Ayman1511/Quiz_Evaluation_Platform.git
-
-2. **Navigate to the Project Directory:**
-```bash
-   cd Quiz_Evaluation_Platform
-
-3. **Install Dependencies:**
-```bash
-   pip install -r requirements.txt
-
-4. **Set Up the Database:**
+2. **Set Up the Database:**
     Create a New Database: Log into MySQL and create a new database:
     CREATE DATABASE quiz_evaluation;
     Update Configuration: Edit the config.py file to include your MySQL database credentials:
-    SQLALCHEMY_DATABASE_URI = 'mysql://username:password@localhost/quiz_evaluation'
-    Run Database Migrations: Initialize database schema:
+    SQLALCHEMY_DATABASE_URI = 'mysql://username:password@localhost/quiz_evaluation'.
 
-5. **Run the server**
+3. **Navigate to the Project Directory:**
 ```bash
-    export FLASK_APP=run.py
+   cd Quiz_Evaluation_Platform
+   pip install -r requirements.txt
+   export FLASK_APP=run.py
     flask run
-    The application will be accessible at http://localhost:5000.
+
+The application will be accessible at http://localhost:5000.
