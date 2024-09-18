@@ -32,20 +32,28 @@ def get_exam_results(exam_id, user_id):
         exam_id=exam_id,
         student_id=user_id
     ).all()
-    
+
     if not results:
         return None
-    
-    all_results = []
+
+
+    num_of_trials = len(results)
+
+
+    all_results = {
+        'attempt_number': num_of_trials,
+        'results': []
+    }
+
     for result in results:
-        all_results.append({
+        all_results['results'].append({
             'exam_id': result.exam_id,
             'student_id': result.student_id,
             'score': result.score,
-            'date_taken': result.date_taken.strftime('%Y-%m-%d'), 
+            'date_taken': result.date_taken.strftime('%Y-%m-%d'),
             'duration': result.duration
         })
-    
+
     return all_results
 
 
