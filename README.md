@@ -4,8 +4,11 @@
 
 Welcome to the **Quiz Evaluation Platform**! This project provides an innovative and user-friendly solution for creating, administering, and evaluating quizzes. It offers features such as real-time student participation, performance analytics, and secure data handling.
 
-- **Final Project Blog Article:** [Read More](#)
-- **Author LinkedIn:** [Wessal Ayman](https://www.linkedin.com/in/wessal-ayman/)
+- **Final Project Blog Article:** [Read More](https://www.linkedin.com/feed/update/urn:li:activity:7242197599754088450/)
+- **Author LinkedIn:** 
+  - [Wessal Ayman](linkedin.com/in/wessal-ayman-43ab19254)
+  - [𝐀𝐛𝐝𝐞𝐥𝐟𝐚𝐭𝐭𝐚𝐡 𝐌𝐨𝐡𝐚𝐦𝐞𝐝 ](https://www.linkedin.com/in/abd-el-fattah-mohammed-7215a7212?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+  - [𝐑𝐚𝐡𝐦𝐚 𝐑𝐮𝐛𝐢](https://www.linkedin.com/in/rahma-rubi-45663b259?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BivS5wh3XQTGxY9lhLVdGIA%3D%3D)
 
 ![Quiz Evaluation Platform Screenshot](./Pages/Assets/BookOpenQuizWhiz.png)
 
