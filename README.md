@@ -10,7 +10,7 @@ Welcome to the **Quiz Evaluation Platform**! This project provides an innovative
   - [Abdelfattah Mohamed: Frontend Developer](https://www.linkedin.com/in/abd-el-fattah-mohammed-7215a7212?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
   - [Rahma Rubi: Frontend Developer](https://www.linkedin.com/in/rahma-rubi-45663b259?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BivS5wh3XQTGxY9lhLVdGIA%3D%3D)
 
-![Quiz Evaluation Platform Screenshot](./Pages/Assets/BookOpenQuizWhiz.png)
+![Quiz Evaluation Platform Screenshot](./Pages/Assets/TeacherDashboard.jpg)
 
 ## Key Features
 
