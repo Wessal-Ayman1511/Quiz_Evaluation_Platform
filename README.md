@@ -43,10 +43,10 @@ Follow these steps to set up the Quiz Evaluation Platform on your local machine:
    ```bash
    git clone https://github.com/Wessal-Ayman1511/Quiz_Evaluation_Platform.git
 2. **Set Up the Database:**
-    Create a New Database: Log into MySQL and create a new database:
-    CREATE DATABASE quiz_evaluation;
-    Update Configuration: Edit the config.py file to include your MySQL database credentials:
-    SQLALCHEMY_DATABASE_URI = 'mysql://username:password@localhost/quiz_evaluation'.
+    - Create a New Database: Log into MySQL and create a new database:
+    - CREATE DATABASE quiz_evaluation;
+    - Update Configuration: Edit the config.py file to include your MySQL database credentials:
+    - SQLALCHEMY_DATABASE_URI = 'mysql://username:password@localhost/quiz_evaluation'.
 
 3. **Navigate to the Project Directory:**
 ```bash
