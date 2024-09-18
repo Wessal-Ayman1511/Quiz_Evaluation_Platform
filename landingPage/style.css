@@ -1,17 +1,10 @@
 /* General Styles */
-.logo img {
-    width: 120px; /* Slightly larger logo for better visibility */
-    height: auto; /* Maintains aspect ratio */
-    display: inline-block;
-    vertical-align: middle;
-}
-
 body {
-    font-family: 'Roboto', sans-serif; /* Modern font */
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #FAFAFA; /* Very light gray background */
-    color: #333; /* Standard text color */
+    background-color: #FAFAFA;
+    color: #333;
 }
 
 h1, h2, h3 {
@@ -20,17 +13,38 @@ h1, h2, h3 {
 }
 
 p {
-    color: #555; /* Softer gray for paragraphs */
+    color: #555;
     margin-bottom: 15px;
 }
 
 /* Header and Intro Section */
 header.intro {
-    background: linear-gradient(to bottom right, #E2E8F0, #C7D3E4); /* Softer gradient */
+    background: linear-gradient(to bottom right, #E2E8F0, #C7D3E4);
     padding: 70px 30px;
     text-align: center;
     position: relative;
-    /* border-bottom: 4px solid #2D3748; /* Thinner, darker border */
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+header .cover-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../Pages/Assets/BookOpenQuizWhiz.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2; /* Slight transparency to the cover image */
+}
+
+header .intro-content {
+    position: relative; /* To ensure content is above the cover-photo */
+    z-index: 10;
 }
 
 header nav {
@@ -38,9 +52,12 @@ header nav {
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
+    width: 100%;
     background-color: #2D3748;
     color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+    position: fixed;
+    height: 50px;
+    top: 0;
 }
 
 header nav a {
@@ -53,16 +70,6 @@ header nav a {
 
 header nav a:hover {
     color: #E2E8F0;
-}
-
-header .logo {
-    font-size: 2em;
-    font-weight: 700;
-    letter-spacing: 3px;
-}
-
-header .intro-content {
-    margin-top: 30px;
 }
 
 header .intro-content h1 {
@@ -93,73 +100,20 @@ header .button:hover {
     background-color: #1A202C;
     transform: scale(1.05);
 }
-/* Cover Section */
-.cover-photo {
-    width: 100%;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden;
-    position: relative;
-}
-
-.cover-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
 
 /* Feature Section */
 section#features {
     padding: 60px 20px;
-    background-color: #F9FAFB; /* Subtle light background */
+    background-color: #F9FAFB;
     text-align: center;
-}
-
-section#features h2 {
-    font-size: 3em;
-    color: #2D3748;
-    margin-bottom: 20px;
 }
 
 .features-container {
     display: flex;
     justify-content: center;
     gap: 20px;
-    flex-wrap: wrap; /* Ensures responsiveness */
+    flex-wrap: wrap;
     margin-top: 40px;
-}
-
-.feature-card {
-    background-color: #FFFFFF;
-    border-radius: 15px;
-    padding: 30px;
-    width: 300px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px); /* Slight hover effect */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-}
-
-.feature-card i {
-    color: #2D3748;
-    font-size: 2em;
-}
-
-.feature-card h3 {
-    margin-top: 20px;
-    font-size: 1.6em;
-    color: #2D3748;
-}
-
-.feature-card p {
-    color: #4A5568;
-    font-size: 1em;
 }
 
 /* About Section */
@@ -191,4 +145,83 @@ section#about p {
 .team-links a:hover {
     text-decoration: underline;
     color: #4A5568;
+}
+/* Feature Section */
+section#features {
+    padding: 80px 30px;
+    background-color: #f0f4f8; /* Light blue-gray for a modern feel */
+    text-align: center;
+}
+
+.features-container {
+    display: flex;
+    justify-content: space-evenly; /* More even spacing */
+    gap: 30px; /* Larger gap for spacing */
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.feature-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    width: 350px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-12px); /* More pronounced hover effect */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card i {
+    color: #2d3748; /* Darker icon color */
+    font-size: 3em; /* Larger icon */
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    margin-top: 20px;
+    font-size: 1.8em; /* Larger heading */
+    color: #1a202c; /* Darker font */
+    font-weight: 700;
+}
+
+.feature-card p {
+    color: #718096; /* Softer gray */
+    font-size: 1.1em;
+}
+
+/* About Section */
+section#about {
+    padding: 80px 30px;
+    background-color: #edf2f7; /* Light gray-blue for a cleaner look */
+    text-align: center;
+}
+
+section#about h2 {
+    font-size: 2.8em;
+    color: #1a202c;
+    margin-bottom: 30px;
+}
+
+section#about p {
+    color: #4a5568;
+    font-size: 1.2em;
+    line-height: 1.6em; /* Better readability */
+    margin-bottom: 30px;
+}
+
+.team-links a {
+    color: #2b6cb0; /* Blue for link color */
+    margin: 0 15px;
+    font-weight: 700;
+    transition: color 0.3s ease-in-out, text-decoration 0.3s;
+}
+
+.team-links a:hover {
+    text-decoration: underline;
+    color: #2c5282; /* Darker hover color */
 }
