@@ -11,5 +11,5 @@ class Exam(db.Model):
     teacher_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     questions = db.relationship('Question', back_populates='exam', cascade='all, delete-orphan') 
-    results = db.relationship('Result', back_populates='exam')
-    teacher = db.relationship('User', back_populates='exams')
+    results = db.relationship('Result', back_populates='exam', cascade='all, delete-orphan')
+    teacher = db.relationship('User', back_populates='exams', cascade='all, delete-orphan')
