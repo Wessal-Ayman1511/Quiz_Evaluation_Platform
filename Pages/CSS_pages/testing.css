@@ -130,15 +130,6 @@ body {
     color: inherit;
 }
 
-.quiz-title {
-    text-align: center;
-    margin: 80px 0 20px;
-}
-
-.Errors {
-    display: none;
-    color: #6F6661;
-}
 
 .quiz-title h2 {
     font-size: 24px;
@@ -197,40 +188,32 @@ body {
 .marks-input{
     width: 30%;
 }
+.btns{
+    display: flex;              
+    justify-content: center;    
+    align-items: center;       
+    margin-top: 230px;           
+    margin-left: 1000px;
 
-.add-question-btn {
-    background-color: #4a7b99;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 20px auto 0; /* Aligns the button within the quiz section */
-    border-radius: 5px;
-    display: block; /* Ensures the button takes up full width when needed */
-    cursor: pointer;
-    width: fit-content; /* Keeps button width to content size */
 }
 
-.save-btn {
-    background-color: #e3d8d5;
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: block;
-    margin: 10px auto 0; /* Moved the Save button up a bit */
+.edit-btn, .delete-btn {
+    padding: 10px 20px;        
+    margin: 0 10px;            
+    background-color: #f3f3f3;  
+    border: 1px solid #ccc;    
+    border-radius: 5px;         
+    cursor: pointer;           
 }
 
+.edit-btn:hover, .delete-btn:hover
+{
+   
+     background-color: #e2e2e2;  /* Slight hover effect */
+    
+}
 .summary {
-    position: fixed;  /* Fixes the position relative to the viewport */
-    bottom: 10px;     /* Positions it 10px from the bottom */
-    right: 10px;      /* Positions it 10px from the right */
-    background-color: #d3c7c6;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 1000;    /* Ensures it appears on top of other elements */
+    margin: 20px 0;
 }
 
 /* Responsive Styling */

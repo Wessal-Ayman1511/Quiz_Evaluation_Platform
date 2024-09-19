@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz Creator</title>
   <link rel="stylesheet" href="../CSS_pages/view_content.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -33,40 +34,46 @@
         </div>
     
 
-      <div class="quiz-title">
-        <h2 style="padding-top: 30px ; padding-bottom:10px;">Quiz Title</h2>
-      </div>
+        <div class="quiz-title">
+          <h2 style="padding-top: 30px; padding-bottom:10px;">Quiz Title</h2>
+          <input type="text" id="quizTitle" class="quiz-title-input" placeholder="Enter Quiz Title">
+          <p class="Errors" id="titleError">Title should be at least 4 characters.</p>
+        </div>
 
-      <div class="quiz-section">
-        <div class="question-box">
-           <b>Mark: 2</b> 
-            <br>
-          <label for="question" style="padding-left: 155px; padding-right:155px;"><b> "What is the color of the sky?..."</b></label>
-        </div>
-          
-          <div class="answers">
-            <ul class="answer-list">
-              <li>
-                <input type="text" class="answer-input" placeholder="Option 1...">
-              </li>
-              <li>
-                <input type="text" class="answer-input" placeholder="Option 2...">
-              </li>
-              <li>
-                <input type="text" class="answer-input" placeholder="Option 3...">
-              </li>
-              <li>
-                <input type="text" class="answer-input" placeholder="Option 4...">
-              </li>
-            </ul>
-          </div>
-        </div>
-        
+      <!-- Questions Section -->
+      <div name="questions">
+          <!-- Question 1 -->
+          <!-- <div class="quiz-section" id="question1">
+              <button class="delete-btn" style="font-size: large;color: red;">X</button>
+              <input type="text" id="marks" class="marks-input" placeholder="Mark...">
+              <p class="Errors" id="markError">Mark should be a number.</p>
+              <div class="question-box">
+                  <label for="question" style="padding-left: 195px; padding-right:195px;"><b>Question Statement</b></label>
+                  <input type="text" id="Qstatement" class="question-input" placeholder="What is the color of the sky?...">
+                  
+                  <div class="answers">
+                      <label style="padding-left: 41%; padding-right: 41%"><b>Answers</b></label>
+                      <ul class="answer-list">
+                          <li><label><input type="radio" name="correctAnswer" value="1"><input type="text" class="answer-input" id=1 placeholder="Option 1..."></label></li>
+                          <li><label><input type="radio" name="correctAnswer" value="2"><input type="text" class="answer-input" id=2 placeholder="Option 2..."></label></li>
+                          <li><label><input type="radio" name="correctAnswer" value="3"><input type="text" class="answer-input" id=3 placeholder="Option 3..."></label></li>
+                          <li><label><input type="radio" name="correctAnswer" value="4"><input type="text" class="answer-input" id=4 placeholder="Option 4..."></label></li>
+                      </ul>
+                      <p class="Errors" id="choiceError">You have to choose which answer is correct.</p>
+                  </div>
+              </div>
+              <button class="add-question-btn" id="button1">Add Question</button>
+          </div> -->
+      </div>
+      <div class="summary">
+        <p>Total Marks: 0 / Questions: 0</p>
+      </div>
         <div class="btns">
         <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
+        <button class="delete-btn" id="quizDeleteButton">Delete</button>
         </div>
     </div>
   </div>
+  <script src="../JS_pages/view_content.js"></script>
 </body>
 </html>

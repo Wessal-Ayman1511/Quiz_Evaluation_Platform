@@ -75,7 +75,7 @@ function sortQuizzes() {
     if (sortBy === 'name') {
         quizzes.sort((a, b) => a.title.localeCompare(b.title));
     } else if (sortBy === 'participant') {
-        quizzes.sort((a, b) => a.participants - b.participants);
+        quizzes.sort((a, b) => b.participants - a.participants);
     } else if (sortBy === 'mark') {
         quizzes.sort((a, b) => b.total_score - a.total_score); // Assuming score is numeric
     } else if (sortBy === 'date') {
@@ -103,7 +103,7 @@ document.querySelector('tbody').addEventListener('click', function(event) {
         const btnId = event.target.id.substring(4); // getting the button id and removing the button word from the beginning
         // handleButtonClick(action);
         sessionStorage.setItem("quizId", JSON.stringify(btnId));
-        window.location.href = "./viwe_content.html";
+        window.location.href = "./view_content.html";
     }
 });
 
