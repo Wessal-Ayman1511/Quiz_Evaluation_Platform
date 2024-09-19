@@ -98,7 +98,7 @@ function createNewQuestionSection(question, last) {
 
     // Create the inputs and buttons for the new question
     questionDiv.innerHTML = `
-        <button id="questionDel${question.id}" class="delete-btn" style="font-size: large;color: red;">X</button>
+        <button id="questionDel${question.id}" class="delete-btn" name="questionDeleteButton" style="font-size: large;color: red;">X</button>
         <input type="text" id="marks" class="marks-input" placeholder="Mark..." value="${question.mark}">
         <p class="Errors" id="markError">Mark should be a number.</p>
         <div class="question-box">
@@ -229,6 +229,8 @@ function createNewQuestionSection(question, last) {
         // Start the timer after everything is rendered
     });
     
+
+
     document.querySelector('.main').addEventListener('click', function(event) {
         if (event.target && event.target.matches('.answer-input')) {
             const btnId = event.target.id;
@@ -280,39 +282,57 @@ function createNewQuestionSection(question, last) {
     // });
     
     document.querySelector('.main').addEventListener('click', async function (event) {
-        if (event.target && event.target.matches('.delete-btn')) {
-            const id = event.target.id.substring(11);
+        if (event.target && event.target.matches('#quizDeleteButton')) {
             const quizId = JSON.parse(sessionStorage.getItem("quizId"));
-            const questionContainer = document.getElementById('question' + id);
+            console.log(quizId);
             const token = JSON.parse(sessionStorage.apiResponse).access_token;
-            
-            const userConfirmed = confirm("Do you want to delete this question?");
-
-            if (userConfirmed){
+            const userConfirmed = confirm("Do you want to delete this quiz?");
+    
+            if (userConfirmed) {
                 try {
                     const config = {
-                        headers : {
+                        headers: {
                             'Authorization': `Bearer ${token}`
                         }
                     };
-                    const response = await axios.delete(url + `/api/exams/${quizId}/questions/${id}`, config)
-                    .then(response => {
-                        // Handle the success response
-                        console.log(response.data);
-                        if (questionContainer) {
-                            questionContainer.remove();
-                        }
-                    })
-                    .catch(error => {
-                        // Handle the error response
-                        console.error(error);
-                    });
+                    await axios.delete(`${url}/api/exams/${quizId}`, config);
+                    window.location.href = "./TeacherDashboard.html";
                 } catch (error) {
-
+                    console.error('Error deleting question:', error.response ? error.response.data : error.message);
                 }
             }
         }
     });
+    
+    
+document.querySelector('.main').addEventListener('click', async function (event) {
+    if (event.target && event.target.matches('[name="questionDeleteButton"]')) {
+        const id = event.target.id.substring(11);
+        const quizId = JSON.parse(sessionStorage.getItem("quizId"));
+        const questionContainer = document.getElementById('question' + id);
+        const token = JSON.parse(sessionStorage.apiResponse).access_token;
+        console.log(token);
+
+        const userConfirmed = confirm("Do you want to delete this question?");
+
+        if (userConfirmed) {
+            try {
+                const config = {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                };
+                await axios.delete(`${url}/api/exams/${quizId}/questions/${id}`, config);
+                if (questionContainer) {
+                    questionContainer.remove();
+                }
+            } catch (error) {
+                console.error('Error deleting question:', error.response ? error.response.data : error.message);
+            }
+        }
+    }
+});
+
 
     document.querySelector('.main').addEventListener('click', async function (event) {
         if (event.target && event.target.matches('.add-question-btn')) {
