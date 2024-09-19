@@ -282,14 +282,31 @@ function createNewQuestionSection(question, last) {
     document.querySelector('.main').addEventListener('click', async function (event) {
         if (event.target && event.target.matches('.delete-btn')) {
             const id = event.target.id.substring(11);
+            const quizId = JSON.parse(sessionStorage.getItem("quizId"));
             const questionContainer = document.getElementById('question' + id);
             const token = JSON.parse(sessionStorage.apiResponse).access_token;
-
+            
             const userConfirmed = confirm("Do you want to delete this question?");
 
             if (userConfirmed){
                 try {
-                    const response = await axios.
+                    const config = {
+                        headers : {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    };
+                    const response = await axios.delete(url + `/api/exams/${quizId}/questions/${id}`, config)
+                    .then(response => {
+                        // Handle the success response
+                        console.log(response.data);
+                        if (questionContainer) {
+                            questionContainer.remove();
+                        }
+                    })
+                    .catch(error => {
+                        // Handle the error response
+                        console.error(error);
+                    });
                 } catch (error) {
 
                 }
