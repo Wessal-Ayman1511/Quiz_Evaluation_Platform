@@ -274,6 +274,11 @@ def delete_question(exam_id, question_id):
     question = Question.query.filter_by(id=question_id, exam_id=exam_id).first()
     if not question:
         return jsonify({'error': 'Question not found'}), 404
+    
+    # Delete all user answers associated with the question
+    user_answers = UserAnswer.query.filter_by(question_id=question_id).all()
+    for answer in user_answers:
+        db.session.delete(answer)
 
     try:
         db.session.delete(question)
