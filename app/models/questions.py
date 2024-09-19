@@ -15,4 +15,4 @@ class Question(db.Model):
 
     
     exam = db.relationship('Exam', back_populates='questions')
-    user_answers = db.relationship('UserAnswer', back_populates='question')
+    user_answers = db.relationship('UserAnswer', back_populates='question', cascade='all, delete-orphan')
