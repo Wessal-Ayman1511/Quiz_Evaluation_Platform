@@ -202,7 +202,7 @@ def add_question_to_exam(exam_id):
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
-    return jsonify({'message': 'Question added successfully'}), 201
+    return jsonify({'id': new_question.id}), 201
 
 
 # update specific question in specific exam
