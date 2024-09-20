@@ -21,6 +21,7 @@ function displayQuizzes(quizzes) {
             <td>${quiz.duration} min</td>
             <td>${quiz.score}</td>
             <td>${quiz.date_taken}</td>
+            <td><a class="Trials" href="#" id='Trials${quiz.exam_id}'>${quiz.attempt_number}</a></td?
         `;
         tableBody.appendChild(newRow);
     });
@@ -51,7 +52,6 @@ async function loadQuizzes(token) {
 
         // Display all quizzes initially
         const quizzes = JSON.parse(sessionStorage.getItem("allMarks"));
-        console.log(quizzes);
         displayQuizzes(quizzes); // Show all results on initial load
 
     } catch (error) {
@@ -92,4 +92,14 @@ window.addEventListener('load', function() {
     const searchBar = document.getElementById('searchBar');
     searchBar.addEventListener('input', filterQuizzes); // Call filterQuizzes on each input
     document.getElementById('sortBy').addEventListener('change', sortQuizzes);
+});
+
+
+document.querySelector('tbody').addEventListener('click', function(event) {
+    if (event.target && event.target.matches('.Trials')) {
+        const btnId = Number(event.target.id.substring(6));
+        // handleButtonClick(action);
+        sessionStorage.setItem("quizId", JSON.stringify(btnId));
+        window.location.href = "./trials.html";
+    }
 });

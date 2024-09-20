@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Whiz</title>
+    <link rel="stylesheet" href="../CSS_pages/trials.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="../Assets/BookOpenQuizWhiz.png" alt="Quiz Whiz Logo">
+            </div>
+            <div class="menu">
+                <button class="menu-item active" ><img src="../Assets/Clipboard.png" alt="Clipboard Icon"></button>
+                <button class="menu-item" ><img src="../Assets/Pen.png" alt="Pen Icon"></button>
+            </div>
+        </div>
+    
+        <!-- Main Content -->
+        <div class="main">
+            <header class="header">
+                <input type="text" placeholder="search for a quiz..." id="searchBar">
+                <select id="sortBy">
+                    <option value="">Sort by</option>
+                    <option value="mark">Mark</option>
+                    <option value="date">Date</option>
+                    <option value="duration">Duration</option>
+                </select>
+                <div class="user-notifications">
+                    <span class="bell">🔔</span>
+                    <span class="notification-count">3</span>
+                    <div class="user-profile">Sample User ▼</div>
+                </div>
+            </header>
+            <section class="quiz-list">
+                <table>
+                    <thead style="background-color: #eee;">
+                        <tr>
+                            <td>Mark</td>
+                            <td>Duration</td>
+                            <td><b>Date</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr>
+                            <td>Math</td>
+                            <td>participant name</td>
+                            <td>0/100</td>
+                            <td>4/9/2024</td>
+                        </tr>
+                        <tr>
+                            <td>Math</td>
+                            <td>participant name</td>
+                            <td>0/100</td>
+                            <td>4/9/2024</td>
+                        </tr>
+                        <tr>
+                            <td>Math</td>
+                            <td>participant name</td>
+                            <td>0/100</td>
+                            <td>4/9/2024</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="../JS_pages/trials.js"></script>
+</body>
+</html>
