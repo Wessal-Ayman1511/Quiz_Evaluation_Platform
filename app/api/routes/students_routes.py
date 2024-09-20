@@ -97,11 +97,9 @@ def get_results(exam_id):
 
 # Retrieve all exams
 @app_views.route('/api/exams', methods=['GET'])
-@jwt_required()
 def get_exams():
     exams = Exam.query.all()
-    user_id = get_jwt_identity()
-    
+
     
     exams_list = [
         
@@ -114,7 +112,7 @@ def get_exams():
             'teacher_id': exam.teacher_id,
             'created_at': exam.created_at.strftime('%Y-%m-%d'),
             'total_score': calculate_total_score(exam.id),
-            'attempt_number': get_attemp_number(exam.id, user_id)
+            
         }
         for exam in exams
         
@@ -151,7 +149,8 @@ def get_latest_results_for_student():
             'exam_title': latest_results[exam_id].exam.title,
             'score': latest_results[exam_id].score,
             'date_taken': latest_results[exam_id].date_taken.strftime('%Y-%m-%d'),
-            'duration': latest_results[exam_id].duration
+            'duration': latest_results[exam_id].duration,
+            'attempt_number': get_attemp_number(latest_results[exam_id].exam_id, current_user_id)
         }
         for exam_id in latest_results
     ]
