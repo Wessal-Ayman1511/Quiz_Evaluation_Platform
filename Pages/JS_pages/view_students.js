@@ -1,3 +1,7 @@
+const url = "http://127.0.0.1:5000";
+const urlPages = "http://127.0.0.1:5001";
+
+
 function checkLogin() {
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
 
@@ -8,8 +12,20 @@ function checkLogin() {
 }
 
 
+function checkLastPage() {
+    const location = sessionStorage.getItem("lastPage");
 
-const url = "http://127.0.0.1:5000";
+    if (location != (urlPages + "/Pages/HTML_pages/TeacherDashboard.html"))
+    {
+        if (location == null)
+        {
+            window.location.href = "./TeacherDashboard.html";
+        } else {
+            window.location.href = location;
+        }
+    }
+}
+
 function displayParticipants(participants) {
     const tableBody = document.querySelector('table tbody');
     tableBody.innerHTML = ''; // Clear existing rows
@@ -88,7 +104,7 @@ function sortParticipants() {
 
 window.addEventListener('load', function() {
     checkLogin();
-    
+    checkLastPage();
     const token = JSON.parse(sessionStorage.apiResponse).access_token;
     const id = JSON.parse(this.sessionStorage.getItem("quizId"));
     loadParticipants(token, id);
@@ -97,4 +113,21 @@ window.addEventListener('load', function() {
     const searchBar = document.getElementById('searchBar');
     searchBar.addEventListener('input', filterParticipants); // Call filterQuizzes on each input
     document.getElementById('sortBy').addEventListener('change', sortParticipants);
+});
+
+document.querySelector('.container .sidebar').addEventListener('click', function (event) {
+
+    // Use closest to ensure you're targeting the button, not its child elements
+    const clickedButton = event.target;
+
+    if (confirm("Are you sure you want to leave this page without saving?")){
+        sessionStorage.setItem("lastPage", window.location.href);
+        if (clickedButton && clickedButton.id === 'DashboardButton') {
+            window.location.href = "./TeacherDashboard.html";
+        }
+        else if (clickedButton && clickedButton.id === 'createQuizButton') {
+            window.location.href = "./create_code.html"; // Change the path if it's supposed to go to an HTML file
+        }
+            
+    }
 });

@@ -2,6 +2,7 @@ const questionsMap = new Map();
 let total_mark = 0;
 let questionCount = 0;
 const url = "http://127.0.0.1:5000";
+const urlPages = "http://127.0.0.1:5001";
 
 function checkLogin() {
         const isLoggedIn = sessionStorage.getItem('isLoggedIn');
@@ -10,6 +11,20 @@ function checkLogin() {
             // If the user is not logged in, redirect to the login page
             window.location.href = 'login.html';
         }
+}
+
+function checkLastPage() {
+    const location = sessionStorage.getItem("lastPage");
+
+    if (location != (urlPages + "/Pages/HTML_pages/TeacherDashboard.html"))
+    {
+        if (location == null)
+        {
+            window.location.href = "./TeacherDashboard.html";
+        } else {
+            window.location.href = location;
+        }
+    }
 }
 
 function isNumber(str) {
@@ -273,6 +288,7 @@ function createNewQuestionSection(question, id) {
     
     window.addEventListener('load', async function() {
         checkLogin();
+        checkLastPage();
         const quizId = JSON.parse(sessionStorage.getItem("quizId"));
         const token = JSON.parse(sessionStorage.apiResponse).access_token;
         
@@ -484,5 +500,23 @@ document.querySelector('.main').addEventListener('click', async function (event)
             } else {
                 alert("Every quiz must have at least 1 question.");
             }
+        }
+    });
+
+
+    document.querySelector('.container .menu').addEventListener('click', function (event) {
+
+        // Use closest to ensure you're targeting the button, not its child elements
+        const clickedButton = event.target.closest('button');
+    
+        if (confirm("Are you sure you want to leave this page without saving?")){
+            sessionStorage.setItem("lastPage", window.location.href);
+            if (clickedButton && clickedButton.id === 'DashboardButton') {
+                window.location.href = "./TeacherDashboard.html";
+            }
+            else if (clickedButton && clickedButton.id === 'createQuizButton') {
+                window.location.href = "./create_code.html"; // Change the path if it's supposed to go to an HTML file
+            }
+                
         }
     });

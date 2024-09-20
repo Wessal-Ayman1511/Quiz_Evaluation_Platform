@@ -84,15 +84,21 @@ function openQuiz(id) {
     const code = document.getElementById("code" + id).value;
     const quizzes = JSON.parse(sessionStorage.getItem("allQuizzes"));
     document.getElementById("code" + id).value = '';
+    let valie = false;
     
     quizzes.forEach(quiz => {
         if (quiz.id === id && quiz.code === code){
+            valid = true;
             sessionStorage.setItem("quizRequested", JSON.stringify(quiz));
+            sessionStorage.setItem("lastPage", window.location.href);
             window.location.href = 'quizExam.html';
         }
     });
-    document.getElementById("code" + id).style.borderColor = 'red';
-    document.getElementById("code" + id).placeholder = 'wrong code!';
+    if(!valid)
+    {
+        document.getElementById("code" + id).style.borderColor = 'red';
+        document.getElementById("code" + id).placeholder = 'wrong code!';
+    }
 }
 
 // Call checkLogin on page load
@@ -113,5 +119,18 @@ document.querySelector('tbody').addEventListener('click', function(event) {
         const btnId = event.target.id.substring(6); // getting the button id and removing the button word from the beginning
         // handleButtonClick(action);
         openQuiz(Number(btnId));
+    }
+});
+
+document.querySelector('.container .sidebar').addEventListener('click', function (event) {
+
+    // Use closest to ensure you're targeting the button, not its child elements
+    const clickedButton = event.target;
+    sessionStorage.setItem("lastPage", window.location.href);
+    if (clickedButton && clickedButton.id === 'DashboardButton') {
+        window.location.href = "./student_hpme.html"
+    }
+    else if (clickedButton && clickedButton.id === 'createQuizButton') {
+        location.reload(); // Change the path if it's supposed to go to an HTML file
     }
 });

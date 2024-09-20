@@ -1,3 +1,4 @@
+const url = "http://127.0.0.1:5000";
 
 function checkLogin() {
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
@@ -8,7 +9,7 @@ function checkLogin() {
     }
 }
 
-const url = "http://127.0.0.1:5000";
+
 function displayQuizzes(quizzes) {
     const tableBody = document.querySelector('table tbody');
     tableBody.innerHTML = ''; // Clear existing rows
@@ -19,7 +20,7 @@ function displayQuizzes(quizzes) {
         newRow.innerHTML = `
             <td>${quiz.exam_title}</td>
             <td>${quiz.duration} min</td>
-            <td>${quiz.score}</td>
+            <td>${quiz.score} / </td>
             <td>${quiz.date_taken}</td>
             <td><a class="Trials" href="#" id='Trials${quiz.exam_id}'>${quiz.attempt_number}</a></td?
         `;
@@ -100,6 +101,20 @@ document.querySelector('tbody').addEventListener('click', function(event) {
         const btnId = Number(event.target.id.substring(6));
         // handleButtonClick(action);
         sessionStorage.setItem("quizId", JSON.stringify(btnId));
+        sessionStorage.setItem("lastPage", window.location.href);
         window.location.href = "./trials.html";
+    }
+});
+
+document.querySelector('.container .sidebar').addEventListener('click', function (event) {
+
+    // Use closest to ensure you're targeting the button, not its child elements
+    const clickedButton = event.target;
+    sessionStorage.setItem("lastPage", window.location.href);
+    if (clickedButton && clickedButton.id === 'DashboardButton') {
+        window.location.href = "./student_hpme.html"
+    }
+    else if (clickedButton && clickedButton.id === 'createQuizButton') {
+        window.location.href = "./view_quizzes.html"; // Change the path if it's supposed to go to an HTML file
     }
 });

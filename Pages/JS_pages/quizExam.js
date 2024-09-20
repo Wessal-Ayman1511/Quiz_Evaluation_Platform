@@ -1,10 +1,38 @@
+const urlPages = "http://127.0.0.1:5001";
+const url = "http://127.0.0.1:5000";
+const timerDisplay = document.getElementById('timer');
+let answers = [];
+let seconds = 0;
+let minutes = 0;
+let hours = 0;
+let timerInterval;
+
+
 function checkLogin() {
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
 
     if (!isLoggedIn) {
         // If the user is not logged in, redirect to the login page
         window.location.href = 'login.html';
+        return false
     }
+    return true;
+}
+
+function checkLastPage() {
+    const location = sessionStorage.getItem("lastPage");
+
+    if (location != (urlPages + "/Pages/HTML_pages/view_quizzes.html"))
+    {
+        if (location == null)
+        {
+            window.location.href = "./student_hpme.html";
+        } else {
+            window.location.href = location;
+        }
+        return false;
+    }
+    return true;
 }
 
 function createNewQuizQuestion(question) {
@@ -44,13 +72,6 @@ function createNewSubmitButton() {
     return submitButton;
 }
 
-const url = "http://127.0.0.1:5000";
-const timerDisplay = document.getElementById('timer');
-let answers = [];
-let seconds = 0;
-let minutes = 0;
-let hours = 0;
-let timerInterval;
 
 // Update timer display function
 function updateTimer() {
@@ -98,6 +119,7 @@ async function submitExam(token, quiz) {
         };
         const contentResponse = await axios.post(url + `/api/exams/${quiz.id}/submit`, data, config);
         sessionStorage.setItem("totalScore", JSON.stringify(contentResponse));
+        sessionStorage.setItem("lastPage", window.location.href);
         window.location.href = "./student_hpme.html";
     } catch (error) {
         if (error.response) { 
@@ -109,7 +131,10 @@ async function submitExam(token, quiz) {
 }
 
 window.addEventListener('load', async function() {
-    checkLogin();
+    
+    
+
+    if (checkLogin() && checkLastPage()){
     const quiz = JSON.parse(sessionStorage.getItem("quizRequested"));
     const token = JSON.parse(sessionStorage.apiResponse).access_token;
     
@@ -136,6 +161,7 @@ window.addEventListener('load', async function() {
 
     // Start the timer after everything is rendered
     timerInterval = setInterval(updateTimer, 1000);
+    }
 });
 
 document.querySelector('.main').addEventListener('click', function(event) {
@@ -162,8 +188,6 @@ document.querySelector('.main').addEventListener('click', function(event) {
 document.querySelector('.main').addEventListener('click', function(event) {
     answers = [];
     if (event.target && event.target.matches('.submit-btn')) {
-        clearInterval(timerInterval); // Stop the timer
-
         const quiz = JSON.parse(sessionStorage.getItem("quizRequested"));
         const token = JSON.parse(sessionStorage.apiResponse).access_token;
         
@@ -183,7 +207,31 @@ document.querySelector('.main').addEventListener('click', function(event) {
             }
         });
 
-        // Now submit the exam along with the answers array
-        submitExam(token, quiz);
+        if (answers.length < 1)
+            {
+                alert("You can't submit an empty exam, please choose an answer!");
+            } else if (confirm("Do you really want to submit this exam?")) {
+                clearInterval(timerInterval); // Stop the timer
+                submitExam(token, quiz);
+            }
+
     }
 });
+
+document.querySelector('.menu').addEventListener('click', function (event) {
+
+    // Use closest to ensure you're targeting the button, not its child elements
+    const clickedButton = event.target.closest("button");
+    sessionStorage.setItem("lastPage", window.location.href);
+    if (confirm("Do you want to leave the exam now? this trial will not be counted."))
+    {
+        if (clickedButton && clickedButton.id === 'DashboardButton') {
+            window.location.href = "./student_hpme.html"
+        }
+        else if (clickedButton && clickedButton.id === 'createQuizButton') {
+            window.location.href = "./view_quizzes.html"; // Change the path if it's supposed to go to an HTML file
+        }
+    }
+});
+
+

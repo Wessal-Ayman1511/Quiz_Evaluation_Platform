@@ -1,4 +1,6 @@
 const url = "http://127.0.0.1:5000";
+const urlPages = "http://127.0.0.1:5001";
+
 
 function checkLogin() {
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
@@ -7,8 +9,19 @@ function checkLogin() {
         // If the user is not logged in, redirect to the login page
         window.location.href = 'login.html';
     }
-    else {
-        checkExamType();
+}
+
+function checkLastPage() {
+    const location = sessionStorage.getItem("lastPage");
+
+    if (location != (urlPages + "/Pages/HTML_pages/create_code.html"))
+    {
+        if (location == null)
+        {
+            window.location.href = "./TeacherDashboard.html";
+        } else {
+            window.location.href = location;
+        }
     }
 }
 
@@ -17,25 +30,13 @@ function isNumber(str) {
     return !isNaN(str.trim()) && str.trim() !== '';
 }
 
-function checkExamType() {
-    const tab = document.referrer.split('/')[4];
-    // if (tab != "create_code" && tab != 'TeacherDashboard.html')
-    // {
-    //     window.localStorage.href = 'TeacherDashboard.html';
-    //     return;
-    // }
-    // else if (tab == "TeacherDashboard.html")
-    // {
-    //     //fillData();
-    // }
-
-        const createdExam = JSON.parse(sessionStorage.getItem("createdExam"));
-        document.getElementById("quizTitle").value = createdExam.data.title;
-}
 
 window.addEventListener("load", (event) => {
     event.preventDefault();
     checkLogin();
+    checkLastPage();
+    const createdExam = JSON.parse(sessionStorage.getItem("createdExam"));
+    document.getElementById("quizTitle").value = createdExam.data.title;
 });
 
 // document.addEventListener('click', function(event) {
@@ -261,10 +262,38 @@ document.querySelector(".save-btn").addEventListener("click", async function (ev
     }
     else {
         document.querySelector("#quizError").style.display = "none";
+        sessionStorage.setItem("lastPage", window.location.href);
         window.location.href = "./TeacherDashboard.html";
     }
 });
 
 
 
+document.querySelector('.menu').addEventListener('click', async function (event) {
 
+    // Use closest to ensure you're targeting the button, not its child elements
+    const clickedButton = event.target.closest('button');
+
+    if (clickedButton && clickedButton.id === 'DashboardButton') {
+        if (confirm("Do you really want to leave this page?, a quiz with no questions will be deleted.")){
+            if (questionCount < 2)
+            {
+                const quizId = JSON.parse(sessionStorage.getItem("createdExam")).id;
+                const token = JSON.parse(sessionStorage.apiResponse).access_token;
+                try{
+                    const config = {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    };
+                    await axios.delete(`${url}/api/exams/${quizId}`, config);
+                } catch(error) {
+                    console.error("Error: ", error);
+                }
+            }
+            sessionStorage.setItem("lastPage", window.location.href);
+            window.location.href = "./TeacherDashboard.html";
+        }
+    }
+    
+});

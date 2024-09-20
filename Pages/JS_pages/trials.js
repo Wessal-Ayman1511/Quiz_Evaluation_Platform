@@ -1,3 +1,6 @@
+const urlPages = "http://127.0.0.1:5001";
+const url = "http://127.0.0.1:5000";
+
 function checkLogin() {
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
 
@@ -7,9 +10,20 @@ function checkLogin() {
     }
 }
 
+function checkLastPage() {
+    const location = sessionStorage.getItem("lastPage");
 
+    if (location != (urlPages + "/Pages/HTML_pages/quiz_marks.html"))
+    {
+        if (location == null)
+        {
+            window.location.href = "./student_hpme.html";
+        } else {
+            window.location.href = location;
+        }
+    }
+}
 
-const url = "http://127.0.0.1:5000";
 function displayTrials(trials) {
     const tableBody = document.querySelector('table tbody');
     tableBody.innerHTML = ''; // Clear existing rows
@@ -87,6 +101,7 @@ function sortTrials() {
 
 window.addEventListener('load', function() {
     checkLogin();
+    checkLastPage();
     const token = JSON.parse(sessionStorage.apiResponse).access_token;
     loadTrials(token);
 
@@ -94,4 +109,17 @@ window.addEventListener('load', function() {
     const searchBar = document.getElementById('searchBar');
     searchBar.addEventListener('input', filterTrials); // Call filterQuizzes on each input
     document.getElementById('sortBy').addEventListener('change', sortTrials);
+});
+
+document.querySelector('.container .menu').addEventListener('click', function (event) {
+
+    // Use closest to ensure you're targeting the button, not its child elements
+    const clickedButton = event.target.closest("button");
+    sessionStorage.setItem("lastPage", window.location.href);
+    if (clickedButton && clickedButton.id === 'DashboardButton') {
+        window.location.href = "./student_hpme.html"
+    }
+    else if (clickedButton && clickedButton.id === 'createQuizButton') {
+        window.location.href = "./view_quizzes.html"; // Change the path if it's supposed to go to an HTML file
+    }
 });

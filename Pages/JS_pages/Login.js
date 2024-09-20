@@ -15,7 +15,7 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
         sessionStorage.setItem('isLoggedIn', true);
         if (response.data["role"] == "teacher") 
             {
-                window.location.href = "TeacherDashboard.html";
+                window.location.href = "./TeacherDashboard.html";
             }
         else {
             window.location.href = './student_hpme.html';
