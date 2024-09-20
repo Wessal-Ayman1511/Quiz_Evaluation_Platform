@@ -26,7 +26,19 @@ def calculate_total_score(exam_id):
     return total_score
 
 
-#used in studentResults
+def get_attemp_number(exam_id, user_id):
+    results = Result.query.filter_by(
+        exam_id=exam_id,
+        student_id=user_id
+    ).all()
+
+    if not results:
+        return None
+
+    num_of_trials = len(results)
+    return num_of_trials
+
+# The attempts
 def get_exam_results(exam_id, user_id):
     results = Result.query.filter_by(
         exam_id=exam_id,
@@ -37,11 +49,7 @@ def get_exam_results(exam_id, user_id):
         return None
 
 
-    num_of_trials = len(results)
-
-
     all_results = {
-        'attempt_number': num_of_trials,
         'results': []
     }
 

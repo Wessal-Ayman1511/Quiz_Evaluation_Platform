@@ -97,18 +97,28 @@ def get_results(exam_id):
 
 # Retrieve all exams
 @app_views.route('/api/exams', methods=['GET'])
+@jwt_required()
 def get_exams():
     exams = Exam.query.all()
+    user_id = get_jwt_identity()
+    
+    
     exams_list = [
+        
+        
         {
+
             'id': exam.id,
             'title': exam.title,
             'code': exam.code,
             'teacher_id': exam.teacher_id,
             'created_at': exam.created_at.strftime('%Y-%m-%d'),
-            'total_score': calculate_total_score(exam.id)
+            'total_score': calculate_total_score(exam.id),
+            'attempt_number': get_attemp_number(exam.id, user_id)
         }
         for exam in exams
+        
+        
     ]
 
     return jsonify(exams_list), 200
