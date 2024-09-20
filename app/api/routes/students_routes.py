@@ -150,7 +150,8 @@ def get_latest_results_for_student():
             'score': latest_results[exam_id].score,
             'date_taken': latest_results[exam_id].date_taken.strftime('%Y-%m-%d'),
             'duration': latest_results[exam_id].duration,
-            'attempt_number': get_attemp_number(latest_results[exam_id].exam_id, current_user_id)
+            'attempt_number': get_attemp_number(latest_results[exam_id].exam_id, current_user_id),
+            'total_score': calculate_total_score(latest_results[exam_id].exam_id)
         }
         for exam_id in latest_results
     ]
