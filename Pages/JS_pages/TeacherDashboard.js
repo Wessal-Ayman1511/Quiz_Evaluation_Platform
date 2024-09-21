@@ -103,7 +103,8 @@ document.querySelector('tbody').addEventListener('click', function(event) {
         const btnId = event.target.id.substring(4); // getting the button id and removing the button word from the beginning
         // handleButtonClick(action);
         sessionStorage.setItem("quizId", JSON.stringify(btnId));
-        sessionStorage.setItem("lastPage", window.location.href);
+        const newUrl = window.location.href.replace(/#/g, ' ');
+        sessionStorage.setItem("lastPage", newUrl);
         window.location.href = "./view_content.html";
     }
 });
@@ -113,7 +114,8 @@ document.querySelector('tbody').addEventListener('click', function(event) {
         const btnId = event.target.id.substring(8); // getting the button id and removing the button word from the beginning
         // handleButtonClick(action);
         sessionStorage.setItem("quizId", JSON.stringify(btnId));
-        sessionStorage.setItem("lastPage", window.location.href);
+        const newUrl = window.location.href.replace(/#/g, ' ');
+        sessionStorage.setItem("lastPage", newUrl);
         window.location.href = "./view_students.html";
     }
 });
@@ -127,7 +129,8 @@ document.querySelector('.container .menu').addEventListener('click', function (e
         location.reload();
     }
     else if (clickedButton && clickedButton.id === 'createQuizButton') {
-        sessionStorage.setItem("lastPage", window.location.href);
+        const newUrl = window.location.href.replace(/#/g, ' ');
+        sessionStorage.setItem("lastPage", newUrl);
         window.location.href = "./create_code.html"; // Change the path if it's supposed to go to an HTML file
     }
 });

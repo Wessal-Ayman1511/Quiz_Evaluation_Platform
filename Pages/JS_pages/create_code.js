@@ -137,8 +137,10 @@ document.getElementById("createButton").addEventListener("click", async (event) 
                 "id" : response.data.exam_id,
                 "data" : data
             });
+           
             sessionStorage.setItem("createdExam", createdExam);
-            sessionStorage.setItem("lastPage", window.location.href);
+            const newUrl = window.location.href.replace(/#/g, ' ');
+            sessionStorage.setItem("lastPage", newUrl);
             window.location.href = "./createquiz.html"
         } catch (error) {
             if (error.response && error.response.status >= 400) { // Check if error.response exists
@@ -157,7 +159,8 @@ document.querySelector('.menu').addEventListener('click', function (event) {
     const clickedButton = event.target.closest('button');
 
     if (clickedButton && clickedButton.id === 'DashboardButton') {
-        sessionStorage.setItem("lastPage", window.location.href);
+        const newUrl = window.location.href.replace(/#/g, ' ');
+        sessionStorage.setItem("lastPage", newUrl);
         console.log(sessionStorage.getItem("lastPage"));
         window.location.href = "./TeacherDashboard.html";
     }

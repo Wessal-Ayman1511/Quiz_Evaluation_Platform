@@ -20,7 +20,7 @@ function displayQuizzes(quizzes) {
         newRow.innerHTML = `
             <td>${quiz.exam_title}</td>
             <td>${quiz.duration} min</td>
-            <td>${quiz.score} / </td>
+            <td>${quiz.score} / ${quiz.total_score} </td>
             <td>${quiz.date_taken}</td>
             <td><a class="Trials" href="#" id='Trials${quiz.exam_id}'>${quiz.attempt_number}</a></td?
         `;
@@ -101,7 +101,8 @@ document.querySelector('tbody').addEventListener('click', function(event) {
         const btnId = Number(event.target.id.substring(6));
         // handleButtonClick(action);
         sessionStorage.setItem("quizId", JSON.stringify(btnId));
-        sessionStorage.setItem("lastPage", window.location.href);
+        const newUrl = window.location.href.replace(/#/g, ' ');
+        sessionStorage.setItem("lastPage", newUrl);
         window.location.href = "./trials.html";
     }
 });
@@ -110,7 +111,8 @@ document.querySelector('.container .sidebar').addEventListener('click', function
 
     // Use closest to ensure you're targeting the button, not its child elements
     const clickedButton = event.target;
-    sessionStorage.setItem("lastPage", window.location.href);
+    const newUrl = window.location.href.replace(/#/g, ' ');
+    sessionStorage.setItem("lastPage", newUrl);
     if (clickedButton && clickedButton.id === 'DashboardButton') {
         window.location.href = "./student_hpme.html"
     }

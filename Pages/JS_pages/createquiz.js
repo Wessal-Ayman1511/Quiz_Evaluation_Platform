@@ -1,5 +1,5 @@
 const url = "http://127.0.0.1:5000";
-const urlPages = "http://127.0.0.1:5001";
+const urlPages = "http://127.0.0.1:5500";
 
 
 function checkLogin() {
@@ -262,7 +262,8 @@ document.querySelector(".save-btn").addEventListener("click", async function (ev
     }
     else {
         document.querySelector("#quizError").style.display = "none";
-        sessionStorage.setItem("lastPage", window.location.href);
+        const newUrl = window.location.href.replace(/#/g, ' ');
+        sessionStorage.setItem("lastPage", newUrl);
         window.location.href = "./TeacherDashboard.html";
     }
 });
@@ -291,7 +292,8 @@ document.querySelector('.menu').addEventListener('click', async function (event)
                     console.error("Error: ", error);
                 }
             }
-            sessionStorage.setItem("lastPage", window.location.href);
+            const newUrl = window.location.href.replace(/#/g, ' ');
+            sessionStorage.setItem("lastPage", newUrl);
             window.location.href = "./TeacherDashboard.html";
         }
     }

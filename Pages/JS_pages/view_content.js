@@ -2,7 +2,7 @@ const questionsMap = new Map();
 let total_mark = 0;
 let questionCount = 0;
 const url = "http://127.0.0.1:5000";
-const urlPages = "http://127.0.0.1:5001";
+const urlPages = "http://127.0.0.1:5500";
 
 function checkLogin() {
         const isLoggedIn = sessionStorage.getItem('isLoggedIn');

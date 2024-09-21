@@ -1,4 +1,4 @@
-const urlPages = "http://127.0.0.1:5001";
+const urlPages = "http://127.0.0.1:5500";
 const url = "http://127.0.0.1:5000";
 const timerDisplay = document.getElementById('timer');
 let answers = [];
@@ -119,7 +119,8 @@ async function submitExam(token, quiz) {
         };
         const contentResponse = await axios.post(url + `/api/exams/${quiz.id}/submit`, data, config);
         sessionStorage.setItem("totalScore", JSON.stringify(contentResponse));
-        sessionStorage.setItem("lastPage", window.location.href);
+        const newUrl = window.location.href.replace(/#/g, ' ');
+        sessionStorage.setItem("lastPage", newUrl);
         window.location.href = "./student_hpme.html";
     } catch (error) {
         if (error.response) { 
@@ -222,7 +223,8 @@ document.querySelector('.menu').addEventListener('click', function (event) {
 
     // Use closest to ensure you're targeting the button, not its child elements
     const clickedButton = event.target.closest("button");
-    sessionStorage.setItem("lastPage", window.location.href);
+    const newUrl = window.location.href.replace(/#/g, ' ');
+    sessionStorage.setItem("lastPage", newUrl);
     if (confirm("Do you want to leave the exam now? this trial will not be counted."))
     {
         if (clickedButton && clickedButton.id === 'DashboardButton') {
@@ -233,5 +235,3 @@ document.querySelector('.menu').addEventListener('click', function (event) {
         }
     }
 });
-
-
