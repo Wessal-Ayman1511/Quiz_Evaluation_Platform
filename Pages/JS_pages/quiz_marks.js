@@ -101,7 +101,7 @@ document.querySelector('tbody').addEventListener('click', function(event) {
         const btnId = Number(event.target.id.substring(6));
         // handleButtonClick(action);
         sessionStorage.setItem("quizId", JSON.stringify(btnId));
-        const newUrl = window.location.href.replace(/#/g, ' ');
+        const newUrl = window.location.href.replace(/#/g, '');
         sessionStorage.setItem("lastPage", newUrl);
         window.location.href = "./trials.html";
     }
@@ -111,7 +111,7 @@ document.querySelector('.container .sidebar').addEventListener('click', function
 
     // Use closest to ensure you're targeting the button, not its child elements
     const clickedButton = event.target;
-    const newUrl = window.location.href.replace(/#/g, ' ');
+    const newUrl = window.location.href.replace(/#/g, '');
     sessionStorage.setItem("lastPage", newUrl);
     if (clickedButton && clickedButton.id === 'DashboardButton') {
         window.location.href = "./student_hpme.html"

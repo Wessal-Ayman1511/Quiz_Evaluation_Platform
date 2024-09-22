@@ -2,7 +2,7 @@ const questionsMap = new Map();
 let total_mark = 0;
 let questionCount = 0;
 const url = "http://127.0.0.1:5000";
-const urlPages = "http://127.0.0.1:5500";
+const urlPages = "http://127.0.0.1:5001";
 
 function checkLogin() {
         const isLoggedIn = sessionStorage.getItem('isLoggedIn');
@@ -510,7 +510,8 @@ document.querySelector('.main').addEventListener('click', async function (event)
         const clickedButton = event.target.closest('button');
     
         if (confirm("Are you sure you want to leave this page without saving?")){
-            sessionStorage.setItem("lastPage", window.location.href);
+            const newUrl = window.location.href.replace(/#/g, '');
+            sessionStorage.setItem("lastPage", newUrl);
             if (clickedButton && clickedButton.id === 'DashboardButton') {
                 window.location.href = "./TeacherDashboard.html";
             }

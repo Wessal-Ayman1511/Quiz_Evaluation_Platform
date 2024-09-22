@@ -84,13 +84,14 @@ function openQuiz(id) {
     const code = document.getElementById("code" + id).value;
     const quizzes = JSON.parse(sessionStorage.getItem("allQuizzes"));
     document.getElementById("code" + id).value = '';
-    let valie = false;
+    let valid = false;
     
     quizzes.forEach(quiz => {
         if (quiz.id === id && quiz.code === code){
             valid = true;
             sessionStorage.setItem("quizRequested", JSON.stringify(quiz));
-            sessionStorage.setItem("lastPage", window.location.href);
+            const newUrl = window.location.href.replace(/#/g, '');
+            sessionStorage.setItem("lastPage", newUrl);
             window.location.href = 'quizExam.html';
         }
     });
@@ -126,7 +127,8 @@ document.querySelector('.container .sidebar').addEventListener('click', function
 
     // Use closest to ensure you're targeting the button, not its child elements
     const clickedButton = event.target;
-    sessionStorage.setItem("lastPage", window.location.href);
+    const newUrl = window.location.href.replace(/#/g, '');
+    sessionStorage.setItem("lastPage", newUrl);
     if (clickedButton && clickedButton.id === 'DashboardButton') {
         window.location.href = "./student_hpme.html"
     }

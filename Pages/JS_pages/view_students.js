@@ -121,7 +121,8 @@ document.querySelector('.container .sidebar').addEventListener('click', function
     const clickedButton = event.target;
 
     if (confirm("Are you sure you want to leave this page without saving?")){
-        sessionStorage.setItem("lastPage", window.location.href);
+        const newUrl = window.location.href.replace(/#/g, '');
+        sessionStorage.setItem("lastPage", newUrl);
         if (clickedButton && clickedButton.id === 'DashboardButton') {
             window.location.href = "./TeacherDashboard.html";
         }

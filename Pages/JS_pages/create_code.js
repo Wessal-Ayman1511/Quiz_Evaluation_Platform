@@ -139,7 +139,7 @@ document.getElementById("createButton").addEventListener("click", async (event) 
             });
            
             sessionStorage.setItem("createdExam", createdExam);
-            const newUrl = window.location.href.replace(/#/g, ' ');
+            const newUrl = window.location.href.replace(/#/g, '');
             sessionStorage.setItem("lastPage", newUrl);
             window.location.href = "./createquiz.html"
         } catch (error) {
@@ -159,7 +159,7 @@ document.querySelector('.menu').addEventListener('click', function (event) {
     const clickedButton = event.target.closest('button');
 
     if (clickedButton && clickedButton.id === 'DashboardButton') {
-        const newUrl = window.location.href.replace(/#/g, ' ');
+        const newUrl = window.location.href.replace(/#/g, '');
         sessionStorage.setItem("lastPage", newUrl);
         console.log(sessionStorage.getItem("lastPage"));
         window.location.href = "./TeacherDashboard.html";
