@@ -32,6 +32,7 @@ def login():
             additional_claims={"role": user.role},
             expires_delta=False
         )
-        return jsonify({'message': 'Login successful', 'role': user.role, 'access_token': access_token}), 200
+        return jsonify({'message': 'Login successful', 'role': user.role,
+                        'access_token': access_token, 'userName': user.name}), 200
     else:
         return jsonify({'error': 'Invalid email or password'}), 401
