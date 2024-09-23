@@ -11,6 +11,12 @@ function checkLogin() {
     }
 }
 
+function setUserName(divClass){
+    const chosenDiv = document.querySelector(`.${divClass}`);
+    const userName = JSON.parse(sessionStorage.getItem("apiResponse")).userName;
+    chosenDiv.innerHTML = userName;
+}
+
 function checkLastPage() {
     const location = sessionStorage.getItem("lastPage");
 
@@ -35,6 +41,7 @@ window.addEventListener("load", (event) => {
     event.preventDefault();
     checkLogin();
     checkLastPage();
+    setUserName("user-button");
     const createdExam = JSON.parse(sessionStorage.getItem("createdExam"));
     document.getElementById("quizTitle").value = createdExam.data.title;
 });

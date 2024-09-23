@@ -1,5 +1,5 @@
 const url = "http://127.0.0.1:5000";
-const urlPages = "http://127.0.0.1:5500";
+const urlPages = "http://127.0.0.1:5001";
 
 
 function checkLogin() {
@@ -11,6 +11,11 @@ function checkLogin() {
     }
 }
 
+function setUserName(divClass){
+    const chosenDiv = document.querySelector(`.${divClass}`);
+    const userName = JSON.parse(sessionStorage.getItem("apiResponse")).userName;
+    chosenDiv.innerHTML = userName;
+}
 
 function checkLastPage() {
     const location = sessionStorage.getItem("lastPage");
@@ -105,6 +110,7 @@ function sortParticipants() {
 window.addEventListener('load', function() {
     checkLogin();
     checkLastPage();
+    setUserName("user-profile");
     const token = JSON.parse(sessionStorage.apiResponse).access_token;
     const id = JSON.parse(this.sessionStorage.getItem("quizId"));
     loadParticipants(token, id);

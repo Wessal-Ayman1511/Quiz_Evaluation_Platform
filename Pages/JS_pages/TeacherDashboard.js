@@ -8,6 +8,11 @@ function checkLogin() {
 }
 
 
+function setUserName(divClass){
+    const chosenDiv = document.querySelector(`.${divClass}`);
+    const userName = JSON.parse(sessionStorage.getItem("apiResponse")).userName;
+    chosenDiv.innerHTML = userName;
+}
 
 const url = "http://127.0.0.1:5000";
 function displayQuizzes(quizzes) {
@@ -89,6 +94,7 @@ function sortQuizzes() {
 
 window.addEventListener('load', function() {
     checkLogin();
+    setUserName("user-profile");
     const token = JSON.parse(sessionStorage.apiResponse).access_token;
     loadQuizzes(token);
 

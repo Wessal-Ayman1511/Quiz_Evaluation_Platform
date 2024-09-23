@@ -19,6 +19,12 @@ function checkLogin() {
     return true;
 }
 
+function setUserName(divClass){
+    const chosenDiv = document.querySelector(`.${divClass}`);
+    const userName = JSON.parse(sessionStorage.getItem("apiResponse")).userName;
+    chosenDiv.innerHTML = userName;
+}
+
 function checkLastPage() {
     const location = sessionStorage.getItem("lastPage");
 
@@ -136,6 +142,7 @@ window.addEventListener('load', async function() {
     
 
     if (checkLogin() && checkLastPage()){
+    setUserName("user-button");
     const quiz = JSON.parse(sessionStorage.getItem("quizRequested"));
     const token = JSON.parse(sessionStorage.apiResponse).access_token;
     

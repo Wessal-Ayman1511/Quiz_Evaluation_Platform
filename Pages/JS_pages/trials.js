@@ -10,6 +10,12 @@ function checkLogin() {
     }
 }
 
+function setUserName(divClass){
+    const chosenDiv = document.querySelector(`.${divClass}`);
+    const userName = JSON.parse(sessionStorage.getItem("apiResponse")).userName;
+    chosenDiv.innerHTML = userName;
+}
+
 function checkLastPage() {
     const location = sessionStorage.getItem("lastPage");
 
@@ -102,6 +108,7 @@ function sortTrials() {
 window.addEventListener('load', function() {
     checkLogin();
     checkLastPage();
+    setUserName("user-profile");
     const token = JSON.parse(sessionStorage.apiResponse).access_token;
     loadTrials(token);
 

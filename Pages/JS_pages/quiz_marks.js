@@ -9,6 +9,11 @@ function checkLogin() {
     }
 }
 
+function setUserName(divClass){
+    const chosenDiv = document.querySelector(`.${divClass}`);
+    const userName = JSON.parse(sessionStorage.getItem("apiResponse")).userName;
+    chosenDiv.innerHTML = userName;
+}
 
 function displayQuizzes(quizzes) {
     const tableBody = document.querySelector('table tbody');
@@ -86,6 +91,7 @@ function sortQuizzes() {
 // Call checkLogin on page load
 window.addEventListener('load', function() {
     checkLogin();
+    setUserName("user-profile");
     const token = JSON.parse(sessionStorage.apiResponse).access_token;
     loadQuizzes(token);
 

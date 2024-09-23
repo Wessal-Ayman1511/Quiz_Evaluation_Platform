@@ -7,6 +7,13 @@ function checkLogin() {
         window.location.href = 'login.html';
     }
 }
+
+function setUserName(divClass){
+    const chosenDiv = document.querySelector(`.${divClass}`);
+    const userName = JSON.parse(sessionStorage.getItem("apiResponse")).userName;
+    chosenDiv.innerHTML = userName;
+}
+
 const url = "http://127.0.0.1:5000";
 function displayQuizzes(quizzes) {
     const tableBody = document.querySelector('table tbody');
@@ -106,6 +113,7 @@ function openQuiz(id) {
 window.addEventListener('load', function(event) {
     event.preventDefault;
     checkLogin();
+    setUserName("user-profile");
     const token = JSON.parse(sessionStorage.apiResponse).access_token;
     loadQuizzes(token);
 
